@@ -218,7 +218,7 @@ An attacker might physically modify a tag in a way that makes it non-compliant w
 
 ### Misuse of Remote Disablement
 
-An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag.
+An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment.
 
 ## What is in scope
 
