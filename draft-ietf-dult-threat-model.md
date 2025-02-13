@@ -263,9 +263,15 @@ The platform should passively scan for devices suspected of unwanted location tr
 
 Tracking tags may be difficult to locate, and users may not have a device that can actively or passively scan for tracking tags. The DULT protocol should be built with [accessibility in mind](https://cdt.org/insights/centering-disability-in-mitigating-harms-of-bluetooth-tracking-technology/) so that the most people can be protected by the protocol. In addition to push notifications on nearby devices, tracking tags themselves should be able to notify end users. This should include periodic sounds when away from an owner, along with lights and haptics so that people who are Deaf or hard of hearing can still locate them.
 
-### Finding Tracking Tags (JESSIE TODO)
+### Finding Tracking Tags
 
-### Disabling Tracking Tags (JESSIE TODO)
+Even after a location tracker is detected through passive or active scanning, a user may have difficulty in locating it. For example, a tag may be buried under a vehicle cushion. Platforms should allow users who have discovered a tracker through passive or active scanning to request that the tracker signal its presence.
+
+This assistance should be done in a way that is accessible to users with sensory or other impairments by using multimodal signals. For instance, if a platform relies on sounds emitted by a tag to help a user locate it, d/Deaf and hard of hearing users may not be able to use this feature. Platforms should combine different types of signals, such as sound, light, and vibration.
+
+### Disabling Tracking Tags
+
+In order to effectively prevent unwanted location tracking, users should be able to disable location tracker tags. This includes a non-owner user being tracked by a tag's owner, as well as an owner user who believes that an attacker is using their own tag to track them.
 
 ### Privacy and Security Requirements (TODO)
 
