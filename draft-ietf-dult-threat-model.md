@@ -212,10 +212,13 @@ When an attacker deploys tracking tags to follow a victim, they may deploy more 
 
 Bluetooth advertisement packets are not encrypted, so any device with Bluetooh scanning capabilities in proximity to a location tracking tag can receive Bluetooth advertisement packets. If an attacker is able to link an identifier in an advertisement packet to a particular tag, they may be able to use this information to track the tag over time, and potentially by proxy the victim or other individual, without their consent. Tracking tags typically rotate any identifiers associated with the tag, but the duration with which they rotate could be up to 24 hours (see e.g. {{!I-D.detecting-unwanted-location-trackers}}). Beck et al. have [demonstrated](https://eprint.iacr.org/2023/1332.pdf) a technological solution that employs secret sharing and error correction coding that would reduce this to 60 seconds. However, work must investigate how robust this scheme is to the presence of multiple tags (see {{deploying-multiple-tags}}).
 
-### Non-compliant tags (JESSIE TODO)
+### Non-compliant tags
 
-### Misuse of Remote Disablement (JESSIE TODO)
+An attacker might physically modify a tag in a way that makes it non-compliant with the standard (e.g. disabling a speaker or vibration). An attacker might make alterations to a tag's firmware that make it non-compliant with the standard.
 
+### Misuse of Remote Disablement
+
+An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag.
 
 ## What is in scope
 
