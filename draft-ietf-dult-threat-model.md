@@ -48,7 +48,7 @@ Lightweight location tracking tags are in wide use to allow users to locate item
 
 Location tracking tags are widely-used devices that allow users to locate items. These tags function as a component of a crowdsourced tracking network in which devices belonging to other network users (e.g., phones) report on the location of tags they have seen. At a high level, this works as follows:
 
-  - Tags ("accessories") broadcast an advertisement payload containing accessory-specific information. The payload also indicates whether the accessory is separated from its owner and thus potentially lost.
+  - Tags ("accessories") transmit an advertisement payload containing accessory-specific information. The payload also indicates whether the accessory is separated from its owner and thus potentially lost.
   - Devices belonging to other users ("non-owner devices") observe those payloads and if the payload is in a separated mode, reports its location to some central service.
   - The owner queries the central service for the location of their accessory.
 
@@ -69,7 +69,8 @@ In order to minimize these privacy risks, it is necessary to analyze and be able
 
 - **active scanning**: a search for location trackers manually initiated by a user
 - **passive scanning**: a search for location trackers running in the background, often accompanied by notifications for the user
-- **tracking tag**: a small, concealable device that broadcasts location data to other devices
+- **tracking tag**: a small device that is not easily discoverable and transmits location data to other devices.
+- **easily discoverable**: device is larger than 30 cm in at least one dimension, device is larger than 18 cm x 13 xm in two of its dimensions, device is larger than 250 cm<sup>3</sup> in three-dimensional space
 
 # Security Considerations
 
@@ -201,7 +202,7 @@ This is a case involving a high-skill attacker, with a large skill difference be
 
 ### Bluetooth vs. other technologies
 
-The above taxonomy and threat analysis focus on location tracking tags. They are protocol-independent; if a tag were designed using a technology other than Bluetooth, they would still apply. The key attributes are the functionalities and physical properties of the accessory from the user’s perspective. The accessory must be small enough to be easily concealed, and able to broadcast its location to other consumer devices.
+The above taxonomy and threat analysis focus on location tracking tags. They are protocol-independent; if a tag were designed using a technology other than Bluetooth, they would still apply. The key attributes are the functionalities and physical properties of the accessory from the user’s perspective. The accessory must be small and not easily discoverable and able to transmit its location to other consumer devices.
 
 ## Possible Methods to Circumvent DULT Protocol
 
@@ -227,7 +228,7 @@ An attacker might misuse remote disablement features to prevent a victim detecti
 
 ### Technologies
 
-The scope of this threat analysis includes any easily-concealable accessory that is able to broadcast its location to other consumer devices.
+The scope of this threat analysis includes any accessory that is small and not easily discoverable and able to transmit its location to other consumer devices.
 
 ### Attacker Profiles
 
@@ -241,7 +242,7 @@ All victims profiles are in scope regardless of their expertise, access to resou
 
 ### Technologies
 
-There are many types of technology that can be used for location tracking. In many cases, the threat analysis would be similar, as the contexts in which potential attackers and victims exist and use the technology are similar. However, it would be infeasible to attempt to describe a threat analysis for each possible technology in this document. We have therefore limited its scope to location-tracking accessories that are small enough to be easily concealed, and able to broadcast their locations to other devices. The following are out of scope for this document:
+There are many types of technology that can be used for location tracking. In many cases, the threat analysis would be similar, as the contexts in which potential attackers and victims exist and use the technology are similar. However, it would be infeasible to attempt to describe a threat analysis for each possible technology in this document. We have therefore limited its scope to location-tracking accessories that are small and not easily discoverable and able to transmit their locations to other devices. The following are out of scope for this document:
 
   - App-based technologies such as parental monitoring apps.
   - Other Internet of Things (IoT) devices.
