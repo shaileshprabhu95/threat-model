@@ -97,6 +97,9 @@ In addition, the victim also has characteristics which influence the threat anal
   - Expertise level
     - Expert: The victim works in or is actively studying computer science, networking, computer applications, IT, or another technical field.
     - Non-expert: The victim does not work or study in, or is a novice in, a technical field.
+  - Expectation of unwanted tracking
+    - Suspecting: The victim has reason to believe that unwanted tracking is a likely risk.
+    - Unsuspecting: The victim has no particular reason to be concerned about unwanted tracking.
   - Access to resources
     - High: The victim is generally able to safely access practical and relevant resources. These might include funds to pay a car mechanic or private investigator, law enforcement or legal assistance, or other resources.
     - Low: The victim is generally unable to safely access practical and relevant resources. These might include money to pay a car mechanic or private investigator, law enforcement or legal assistance, or other resources.
