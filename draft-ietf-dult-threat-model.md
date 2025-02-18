@@ -289,13 +289,11 @@ Tracking tags may be difficult to locate, and users may not have a device that c
 
 ### Finding Tracking Tags
 
-Even after a location tracker is detected through passive or active scanning, a user may have difficulty in locating it. For example, a tag may be buried under a vehicle cushion. Platforms should allow users who have discovered a tracker through passive or active scanning to request that the tracker signal its presence.
-
-This assistance should be done in a way that is accessible to users with sensory or other impairments by using multimodal signals. For instance, if a platform relies on sounds emitted by a tag to help a user locate it, d/Deaf and hard of hearing users may not be able to use this feature. Platforms should combine different types of signals, such as sound, light, and vibration.
+Even after a location tracker is detected through passive or active scanning, a user may have difficulty in locating it. For example, a tag may be buried under a vehicle cushion. Platforms should allow users who have discovered a tracker through passive or active scanning to request that the tracker signal its presence. This assistance should be done in a way that is accessible to users with sensory or other impairments by using multimodal signals as described in {{tracking-tag-alerts}}.
 
 ### Disabling Tracking Tags
 
-In order to effectively prevent unwanted location tracking, users should be able to disable location tracker tags. This includes a non-owner user being tracked by a tag's owner, as well as an owner user who believes that an attacker is using their own tag to track them.
+In order to effectively prevent unwanted location tracking, users should be able to disable location tracker tags. This includes a non-owner user being tracked by a tag's owner, as well as an owner user who believes that an attacker is using their own tag to track them. Platforms should provide instructions for disabling tracking tags once they are located.
 
 ### Privacy and Security Requirements (TODO)
 
