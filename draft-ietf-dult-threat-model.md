@@ -224,6 +224,51 @@ An attacker might physically modify a tag in a way that makes it non-compliant w
 
 An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment.
 
+### Rotating Tracker IDs
+
+Attackers may use dynamic identifier changes, such as rotating Bluetooth MAC addresses, to evade detection. This makes it difficult for detection systems relying on persistent unknown device identification. Pattern recognition techniques capable of detecting clusters of devices exhibiting ID rotation behaviors can help mitigate this.
+
+### Delayed Activation of Trackers
+
+Some tracking devices remain inactive for extended periods before starting to broadcast, making them harder to detect during initial scans. This allows attackers to delay detection until the victim has traveled a significant distance. Historical tracking behavior analysis, rather than solely real-time scanning, is necessary to mitigate this threat.
+
+### Multi-Tag Correlation Attack
+
+By distributing multiple tracking tags across locations frequently visited by a target (home, workplace, etc.), attackers can reconstruct movement patterns over time. Traditional tracking prevention measures focus on individual devices, making this method difficult to counter. Cross-tag correlation analysis could improve detection of recurring unknown trackers near a user.
+
+### Exploiting Gaps in OS-Based Detection
+
+Some detection systems trigger alerts only under specific conditions, such as when motion is detected. Attackers can adjust device behavior to avoid detection during these periods. A more consistent, vendor-independent approach to unwanted tracking alerts would help reduce blind spots.
+
+### Spoofing Legitimate Devices
+
+Attackers can modify tracker broadcasts to mimic common Bluetooth devices, making them blend into their surroundings and evade detection. Using machine-learning-based anomaly detection techniques can help distinguish genuine devices from potential tracking attempts.
+
+### Heterogeneous Tracker Networks
+
+Attackers may use a mix of tracking devices from different manufacturers (e.g., Apple AirTags, Tile, Samsung SmartTags) to exploit gaps in vendor-specific tracking protections. Many detection systems are brand-dependent, making them ineffective against mixed tracker deployments. Establishing a cross-vendor framework for detection and alerts would enhance protection.
+
+## Threat Prioritization Framework for DULT Threat Model
+
+Threats in the DULT ecosystem vary in severity, feasibility, and likelihood, affecting users in different ways. Some threats enable long-term tracking, while others exploit gaps in detection mechanisms or leverage non-compliant devices. To assess and prioritize these risks, the following framework classifies threats based on their impact, likelihood, feasibility, affected users, and the availability of mitigations.
+
+The Threat Matrix below provides a structured assessment of known threats and their associated risks. This categorization helps in understanding the challenges posed by different tracking techniques and their potential mitigations.
+
+### Threat Matrix
+
+| Threat | Impact (Low/Med/High) | Likelihood (Low/Med/High) | Feasibility (Easy/Moderate/Hard) | Risk Level (Low/Med/High) | Affected Users | Mitigation Available? (Yes/No) |
+| ------ | --------------------- | ------------------------- | -------------------------------- | ------------------------- | -------------- | ------------------------------ |
+| Deploying Multiple Tags | High | High	| Easy | High | Victims | Partial |
+| Remote Advertisement Monitoring | High | High | Easy | High | All users | No |
+| Non-Compliant Tags | High | Medium | Moderate | High | Victims | No |
+| Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
+| Rotating Tracker IDs | High | High | Easy | High | Victims | Partial |
+| Delayed Activation of Trackers | Medium | High | Easy | High | Victims | No |
+| Multi-Tag Correlation Attack | High | Medium | Moderate | High | Victims | No |
+| Exploiting Gaps in OS-based Detection | High | High | Moderate | High | All users | Partial |
+| Spoofing Legitimate Devices | Medium | Medium | Moderate | Medium | Victims | No |
+| Heterogeneous Tracker Networks | High | Medium | Hard | High | Victims | No |
+
 ## What is in scope
 
 ### Technologies
