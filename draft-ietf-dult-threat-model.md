@@ -216,7 +216,7 @@ This is a case involving a high-skill attacker, with a large skill difference be
 
 ### Bluetooth vs. other technologies
 
-The above taxonomy and threat analysis focus on location tracking tags. They are protocol-independent; if a tag were designed using a technology other than Bluetooth, they would still apply. The key attributes are the functionalities and physical properties of the accessory from the user’s perspective. The accessory must be small and not easily discoverable and able to transmit its location to other consumer devices. 
+The above taxonomy and threat analysis focus on location tracking tags. They are protocol-independent; if a tag were designed using a technology other than Bluetooth, they would still apply. The key attributes are the functionalities and physical properties of the accessory from the user’s perspective. The accessory must be small and not easily discoverable and able to transmit its location to other consumer devices.
 
 ## Possible Methods to Circumvent DULT Protocol
 
