@@ -256,7 +256,7 @@ The Threat Matrix below provides a structured assessment of known threats and th
 
 ### Threat Matrix
 
-| Threat | Impact (Low/Med/High) | Likelihood (Low/Med/High) | Feasibility (Easy/Moderate/Hard) | Risk Level (Low/Med/High) | Affected Users | Mitigation Available? (Yes/No) |
+| Threat | Impact | Likelihood | Feasibility | Risk Level | Affected Users | Mitigation Available? |
 | ------ | --------------------- | ------------------------- | -------------------------------- | ------------------------- | -------------- | ------------------------------ |
 | Deploying Multiple Tags | High | High	| Easy | High | Victims | Partial |
 | Remote Advertisement Monitoring | High | High | Easy | High | All users | No |
