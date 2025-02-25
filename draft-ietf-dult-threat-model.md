@@ -402,7 +402,17 @@ There are also design constraints that the DULT Protocol must consider, includin
 
 The Bluetooth Low Energy (BLE) payload used for advertisement consists of up to 37 bytes. One current adoption of unwanted location tracking requires 12 of these bytes for implementing the basic protocol, with the remaining optional (see {{!I-D.detecting-unwanted-location-trackers}}). Implementation of the DULT protocol will need to consider these limitations. For example, in [Eldridge et al](https://eprint.iacr.org/2023/1332.pdf), implementing Multi-Dealer Secret Sharing required using two advertisement packets were needed instead of one.
 
-### Power constraints (TODO)
+### Power constraints
+
+Unwanted tracking detection mechanisms typically rely on periodic Bluetooth scanning to identify unknown tracking devices. However, continuous background scanning poses a significant power challenge, especially for mobile devices with limited battery capacity. Maintaining high-frequency scans for extended periods can lead to excessive energy consumption, impacting device usability and battery longevity.
+
+To address these concerns, detection systems must incorporate power-efficient approaches that balance security with practicality. Adaptive scanning strategies can dynamically adjust the scan frequency based on contextual risk levels. For example, if a suspicious tracking device is detected nearby, the system can temporarily increase scan frequency while reverting to a lower-power mode when no threats are present.
+
+Event-triggered detection offers another alternative by activating scanning only in specific high-risk scenarios. Users moving into a new location or transitioning from a prolonged stationary state may require more frequent detection, while routine movement in known safe environments can minimize energy consumption. Additionally, passive Bluetooth listening techniques could serve as a low-power alternative to active scanning, allowing background detection without excessive battery drain.
+
+To further optimize energy efficiency, detection tasks could be offloaded to companion devices such as smartwatches, home hubs, or other edge devices that continuously monitor nearby signals. Distributing the detection workload across multiple devices reduces the burden on a single mobile device while maintaining effective tracking prevention.
+
+The DULT protocol must account for these power limitations in its design, ensuring that detection mechanisms remain effective without significantly degrading battery performance. Consideration of device-specific constraints, such as variations in power efficiency across smartphones, wearables, and IoT devices, will be critical in maintaining a balance between security and usability.
 
 ### Device constraints
 
