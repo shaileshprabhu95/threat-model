@@ -385,7 +385,7 @@ Tracking tags may be difficult to locate, and users may not have a device that c
 
 ### Finding Tracking Tags
 
-Even after a location tracker is detected through passive or active scanning, a user may have difficulty in locating it. For example, a tag may be buried under a vehicle cushion. Platforms should allow users who have discovered a tracker through passive or active scanning to request that the tracker signal its presence. This assistance should be done in a way that is accessible to users with sensory or other impairments by using multimodal signals as described in {{tracking-tag-alerts}}.
+Even after a location tracker is detected through passive or active scanning, a user may have difficulty in locating it. For example, a tag may be buried under a vehicle cushion. Platforms should allow users who have discovered a tracker through passive or active scanning to request that the tracker signal its presence. This assistance should be done in a way that is accessible to users with sensory or other impairments by using multimodal signals as described in {{tracking-tag-alerts}}. Platforms may also implement other methods to assist in locating trackers, such as precision finding using Ultra-wideband.  
 
 ### Disabling Tracking Tags
 
