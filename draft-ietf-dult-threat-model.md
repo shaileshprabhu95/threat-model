@@ -208,21 +208,90 @@ The above taxonomy and threat analysis focus on location tracking tags. They are
 
 There are several different ways an attacker could attempt to circumvent the DULT protocol in order to track a victim without their consent. These include deploying multiple tags to follow a single victim and using a non-compliant tag (e.g. speaker disabled, altered firmware, spoofed tag). There are also other potential concerns of abuse of the DULT Protocol, such as remotely disabling a victim's tracking tag.
 
+### Threat Prioritization Framework for DULT Threat Model
+
+Threats in the DULT ecosystem vary in severity, feasibility, and likelihood, affecting users in different ways. Some threats enable long-term tracking, while others exploit gaps in detection mechanisms or leverage non-compliant devices. To assess and prioritize these risks, the following framework classifies threats based on their impact, likelihood, feasibility, affected users, and the availability of mitigations. A Threat Matrix is included that provides a structured assessment of known threats and their associated risks. This categorization helps in understanding the challenges posed by different tracking techniques and their potential mitigations.
+
+### Threat Matrix
+
+To systematically assess the risks associated with different threats, we introduce the following threat matrix. This categorization considers key risk factors:
+
+  - Impact: The potential consequences of the threat if successfully exploited.
+    - Low: Minimal effect on privacy and security.
+    - Medium: Moderate effect on user privacy or tracking protection.
+    - High: Severe privacy violations or safety risks.
+  - Likelihood: The probability of encountering this threat in real-world scenarios.
+    - Low: Rare or requires specific conditions.
+    - Medium: Possible under common scenarios.
+    - High: Frequently occurring or easily executed.
+  - Feasibility: The difficulty for an attacker to execute the attack.
+    - Easy: Requires minimal effort or common tools.
+    - Moderate: Needs some technical expertise or resources.
+    - Hard: Requires significant effort, expertise, or access.
+  - Risk Level: A qualitative assessment based on impact, likelihood, and feasibility.
+    - Low: Limited risk requiring minimal mitigation.
+    - Medium: Requires mitigation to prevent common attacks.
+    - High: Critical threat needing immediate mitigation.
+  - Affected Users: These are categorized as either:
+    - Victims: Individuals specifically targeted or affected by the attack.
+    - All users: Anyone using the system, even if they are not directly targeted.
+  - Mitigation Available?: Whether a known mitigation strategy exists.
+    - Yes: A viable mitigation exists.
+    - Partial: Some mitigations exist but are not fully effective.
+    - No: No effective mitigation currently available.
+
+| Threat | Impact | Likelihood | Feasibility | Risk Level | Affected Users | Mitigation Available? |
+| ------ | --------------------- | ------------------------- | -------------------------------- | ------------------------- | -------------- | ------------------------------ |
+| Deploying Multiple Tags | High | High	| Easy | High | Victims | Partial |
+| Remote Advertisement Monitoring | High | High | Easy | High | All users | No |
+| Non-Compliant Tags | High | Medium | Moderate | Medium | Victims | No |
+| Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
+| Rotating Tracker IDs | High | High | Easy | High | Victims | Partial |
+| Delayed Activation of Trackers | Medium | High | Easy | High | Victims | No |
+| Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
+| Exploiting Gaps in OS-based Detection | High | High | Moderate | High | All users | Partial |
+| Spoofing Legitimate Devices | Medium | Medium | Moderate | Medium | Victims | No |
+| Heterogeneous Tracker Networks | High | Medium | Hard | Medium | Victims | No |
+
 ### Deploying Multiple Tags
 
-When an attacker deploys tracking tags to follow a victim, they may deploy more than one tag. For example, if planting a tracking tag in a car, the attacker might place one tag inside the car, and another affixed on the outside of the car. The DULT protocol must be robust to this scenario. This means that scans, whether passive or active, need to be able to return more than one result if a device is suspected of being used for unwanted tracking, and the time to do so must not be significantly impeded by the presence of multiple trackers. This also applies to situations where many tags are present, even if they are not being used for unwanted location tracking, such as a busy train station or airport where tag owners may or may not be in proximity to their tracking tags.
+When an attacker deploys tracking tags to follow a victim, they may deploy more than one tag. For example, if planting a tracking tag in a car, the attacker might place one tag inside the car, and another affixed on the outside of the car. The DULT protocol must be robust to this scenario. This means that scans, whether passive or active, need to be able to return more than one result if a device is suspected of being used for unwanted tracking, and the time to do so must not be significantly impeded by the presence of multiple trackers. This also applies to situations where many tags are present, even if they are not being used for unwanted location tracking, such as a busy train station or airport where tag owners may or may not be in proximity to their tracking tags. This method prolongs unwanted tracking, making it a high-impact threat, as it enables continuous monitoring even if some tags are discovered. Since multiple low-cost tags can be easily deployed, the likelihood is high, and the feasibility is easy, given the availability of commercially accessible trackers. As a result, the overall risk is high, requiring robust countermeasures. While scanning for multiple tags offers partial mitigation, sophisticated attackers may still evade detection by distributing tags strategically.
 
 ### Remote Advertisement Monitoring
 
-Bluetooth advertisement packets are not encrypted, so any device with Bluetooh scanning capabilities in proximity to a location tracking tag can receive Bluetooth advertisement packets. If an attacker is able to link an identifier in an advertisement packet to a particular tag, they may be able to use this information to track the tag over time, and potentially by proxy the victim or other individual, without their consent. Tracking tags typically rotate any identifiers associated with the tag, but the duration with which they rotate could be up to 24 hours (see e.g. {{!I-D.detecting-unwanted-location-trackers}}). Beck et al. have [demonstrated](https://eprint.iacr.org/2023/1332.pdf) a technological solution that employs secret sharing and error correction coding that would reduce this to 60 seconds. However, work must investigate how robust this scheme is to the presence of multiple tags (see {{deploying-multiple-tags}}).
+Bluetooth advertisement packets are not encrypted, so any device with Bluetooh scanning capabilities in proximity to a location tracking tag can receive Bluetooth advertisement packets. If an attacker is able to link an identifier in an advertisement packet to a particular tag, they may be able to use this information to track the tag over time, and potentially by proxy the victim or other individual, without their consent. Tracking tags typically rotate any identifiers associated with the tag, but the duration with which they rotate could be up to 24 hours (see e.g. {{!I-D.detecting-unwanted-location-trackers}}). Beck et al. have [demonstrated](https://eprint.iacr.org/2023/1332.pdf) a technological solution that employs secret sharing and error correction coding that would reduce this to 60 seconds. However, work must investigate how robust this scheme is to the presence of multiple tags (see {{deploying-multiple-tags}}). This attack has a high impact, as it allows persistent surveillance while circumventing built-in protections. Given that capturing Bluetooth signals is trivial using common scanning tools, the likelihood is high, and the feasibility is easy, making it a high-risk attack. While rotating identifiers provides partial mitigation, attackers can still use advanced correlation techniques to bypass this defense.
 
 ### Non-compliant tags
 
-An attacker might physically modify a tag in a way that makes it non-compliant with the standard (e.g. disabling a speaker or vibration). An attacker might make alterations to a tag's firmware that make it non-compliant with the standard.
+An attacker might physically modify a tag in a way that makes it non-compliant with the standard (e.g. disabling a speaker or vibration). An attacker might make alterations to a tag's firmware that make it non-compliant with the standard. This bypasses key protections entirely, making the impact high by preventing victims from discovering hidden trackers. Although technical modifications require some expertise, they are achievable with moderate effort, making the likelihood medium and feasibility moderate. As a result, the overall risk remains medium. Current mitigation methods are incomplete, though research continues on detecting such rogue devices.
 
 ### Misuse of Remote Disablement
 
-An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment.
+An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment. The ability to disable a victim’s protections introduces a medium impact, while the likelihood is medium, as it requires specific technical knowledge. Since execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While authentication measures can partially mitigate this risk, these protections are not foolproof.
+
+### Rotating Tracker IDs
+
+Attackers may use dynamic identifier changes, such as rotating Bluetooth MAC addresses, to evade detection. This makes it difficult for detection systems relying on persistent unknown device identification. Pattern recognition techniques capable of detecting clusters of devices exhibiting ID rotation behaviors can help mitigate this. The impact is high, as it directly undermines detection mechanisms, while the likelihood is high, given that this is a widely used evasion technique. Since implementing ID rotation is straightforward, feasibility is easy, making this a high-risk attack. While time-based correlation methods offer partial mitigation, an ongoing arms race exists between detection and circumvention.
+
+### Delayed Activation of Trackers
+
+Some tracking devices remain inactive for extended periods before starting to broadcast, making them harder to detect during initial scans. This allows attackers to delay detection until the victim has traveled a significant distance. Historical tracking behavior analysis, rather than solely real-time scanning, is necessary to mitigate this threat. The impact is medium, as it temporarily bypasses detection systems, while the likelihood is high, given how easy it is to implement such a delay in firmware. Since execution requires minimal effort, feasibility is easy, making this a high-risk attack. No effective mitigation currently exists, though long-term behavioral analysis could help detect such trackers.
+
+### Multi-Tag Correlation Attack
+
+By distributing multiple tracking tags across locations frequently visited by a target (home, workplace, etc.), attackers can reconstruct movement patterns over time. Traditional tracking prevention measures focus on individual devices, making this method difficult to counter. Cross-tag correlation analysis could improve detection of recurring unknown trackers near a user. The impact is high, as it enables persistent monitoring, while the likelihood is medium, since multiple devices are required. Given that execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While no effective mitigation exists, coordinated scanning across devices could help detect recurring unknown trackers.
+
+### Exploiting Gaps in OS-Based Detection
+
+Some detection systems trigger alerts only under specific conditions, such as when motion is detected. Attackers can adjust device behavior to avoid detection during these periods. A more consistent, vendor-independent approach to unwanted tracking alerts would help reduce blind spots. The impact is high, as it results in gaps in protection across different platforms, while the likelihood is high, given OS fragmentation and differences in security policies. With feasibility at a moderate level, this results in a high-risk attack. While cross-platform threat modeling provides partial mitigation, detection gaps remain.
+
+### Spoofing Legitimate Devices
+
+Attackers can modify tracker broadcasts to mimic common Bluetooth devices, making them blend into their surroundings and evade detection. Using machine-learning-based anomaly detection techniques can help distinguish genuine devices from potential tracking attempts. The impact is medium, as users may mistakenly assume the tracker is a harmless device. However, the likelihood is medium, since executing a convincing spoof is difficult, and the feasibility is moderate, due to the technical requirements. This results in a medium-risk attack. Currently, no effective mitigation exists.
+
+### Heterogeneous Tracker Networks
+
+Attackers may use a mix of tracking devices from different manufacturers (e.g., Apple AirTags, Tile, Samsung SmartTags) to exploit gaps in vendor-specific tracking protections. Many detection systems are brand-dependent, making them ineffective against mixed tracker deployments. Establishing a cross-vendor framework for detection and alerts would enhance protection. The impact is high, as it circumvents traditional defenses, while the likelihood is medium, since deploying multiple brands requires effort. With feasibility at a hard level, this remains a medium-risk attack. No effective mitigation currently exists, though research into cross-technology threat detection is ongoing.
 
 ## What is in scope
 
