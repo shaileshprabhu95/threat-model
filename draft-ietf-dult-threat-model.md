@@ -410,8 +410,6 @@ To address these concerns, detection systems must incorporate power-efficient ap
 
 Event-triggered detection offers another alternative by activating scanning only in specific high-risk scenarios. Users moving into a new location or transitioning from a prolonged stationary state may require more frequent detection, while routine movement in known safe environments can minimize energy consumption. Additionally, passive Bluetooth listening techniques could serve as a low-power alternative to active scanning, allowing background detection without excessive battery drain.
 
-To further optimize energy efficiency, detection tasks could be offloaded to companion devices such as smartwatches, home hubs, or other edge devices that continuously monitor nearby signals. Distributing the detection workload across multiple devices reduces the burden on a single mobile device while maintaining effective tracking prevention.
-
 The DULT protocol must account for these power limitations in its design, ensuring that detection mechanisms remain effective without significantly degrading battery performance. Consideration of device-specific constraints, such as variations in power efficiency across smartphones, wearables, and IoT devices, will be critical in maintaining a balance between security and usability.
 
 ### Device constraints
