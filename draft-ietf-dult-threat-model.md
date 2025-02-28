@@ -400,7 +400,15 @@ There are also design constraints that the DULT Protocol must consider, includin
 
 ### Bluetooth constraints
 
-The Bluetooth Low Energy (BLE) payload used for advertisement consists of up to 37 bytes. One current adoption of unwanted location tracking requires 12 of these bytes for implementing the basic protocol, with the remaining optional (see {{!I-D.detecting-unwanted-location-trackers}}). Implementation of the DULT protocol will need to consider these limitations. For example, in [Eldridge et al](https://eprint.iacr.org/2023/1332.pdf), implementing Multi-Dealer Secret Sharing required using two advertisement packets were needed instead of one.
+The Bluetooth Low Energy (BLE) payload used for advertisement consists of up to 37 bytes. One current adoption of unwanted location tracking requires 12 of these bytes for implementing the basic protocol, with the remaining optional (see {{!I-D.detecting-unwanted-location-trackers}}). Implementation of the DULT protocol will need to consider these limitations. For example, in [Eldridge et al](https://eprint.iacr.org/2023/1332.pdf), implementing Multi-Dealer Secret Sharing required using two advertisement packets were needed instead of one due to payload constraints.
+
+Another key consideration is the nature of BLE advertisements. Most advertisements are publicly broadcast, allowing passive scanning by any nearby receiver. While this enables open detection of unknown tracking devices, it also raises privacy concerns. Some BLE implementations employ randomized MAC addresses and other privacy-preserving techniques, which could impact persistent tracking detection.
+
+Additionally, BLE advertisements operate in the 2.4 GHz ISM band, making them susceptible to interference from Wi-Fi, microwave ovens, and other wireless devices. The presence of environmental noise may degrade detection accuracy and introduce variability in scan results.
+
+The BLE protocol also enforces strict power efficiency mechanisms, such as advertising intervals and connection event scheduling, which impact detection frequency. Devices operating in low-power modes may significantly reduce their advertisement frequency to conserve energy, making periodic detection less reliable. Furthermore, platform-level constraints, such as OS-imposed scanning limits and background activity restrictions, further impact the consistency and responsiveness of tracking detection mechanisms.
+
+To address these challenges, detection mechanisms must balance efficiency, privacy, and accuracy while working within the constraints of the BLE protocol. Solutions may include leveraging multiple observations over time, integrating probabilistic risk scoring, and optimizing scanning strategies based on known BLE limitations.
 
 ### Power constraints
 
@@ -425,20 +433,6 @@ Processing and memory constraints are another limiting factor, particularly for 
 Connectivity limitations introduce additional challenges. Some unwanted tracking detection mechanisms rely on cloud-based lookups to verify tracker identities and share threat intelligence. However, users in offline environments, such as those in airplane mode, rural areas with limited connectivity, or secure facilities with network restrictions, may be unable to access these services. In such cases, detection must rely on local scanning and offline heuristics rather than real-time cloud-based verification.
 
 To address these challenges, detection mechanisms should incorporate adaptive scanning strategies that adjust based on device capabilities, optimizing performance while maintaining security. Lightweight detection methods, such as event-triggered scanning and passive Bluetooth listening, can improve efficiency on constrained devices. Additionally, fallback mechanisms should be implemented to provide at least partial detection functionality even when full-featured scanning is not available. Ensuring that detection remains effective across diverse hardware and software environments is critical for broad user protection.
-
-### BLE Protocol constraints
-
-The Bluetooth Low Energy (BLE) protocol presents several inherent constraints that impact unwanted tracking detection. These limitations must be carefully considered when designing effective and privacy-preserving detection mechanisms.
-
-One key constraint is the limited packet size in BLE advertisements and data exchanges. BLE advertisement packets have a maximum payload size of 31 bytes in legacy advertisements and 255 bytes in extended advertisements. This restriction constrains the amount of metadata that can be included in public broadcasts, limiting the flexibility of encoding tracking identifiers, authentication mechanisms, or additional context needed for detection.
-
-Additionally, BLE advertisements are inherently public and can be observed by any nearby receiver. While this allows broad compatibility for detection mechanisms, it also raises privacy concerns. Many tracking devices employ rolling or ephemeral identifiers to mitigate tracking risks, but these techniques can also complicate unwanted tracking detection by making it harder to associate multiple observations of the same device.
-
-The BLE protocol also enforces strict power efficiency mechanisms, such as advertising intervals and connection event scheduling, which impact detection frequency. Devices operating in low-power modes may significantly reduce their advertisement frequency to conserve energy, making periodic detection less reliable. Furthermore, platform-level constraints, such as OS-imposed scanning limits and background activity restrictions, further impact the consistency and responsiveness of tracking detection mechanisms.
-
-Finally, BLE operates in the 2.4 GHz ISM band, which is subject to interference from Wi-Fi, microwave ovens, and other wireless technologies. In high-interference environments, BLE advertisements may be delayed or lost, affecting the reliability of detection systems.
-
-To address these challenges, detection mechanisms must balance efficiency, privacy, and accuracy while working within the constraints of the BLE protocol. Solutions may include leveraging multiple observations over time, integrating probabilistic risk scoring, and optimizing scanning strategies based on known BLE limitations.
 
 # IANA Considerations
 
