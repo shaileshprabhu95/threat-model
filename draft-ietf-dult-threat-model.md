@@ -220,6 +220,20 @@ An attacker might physically modify a tag in a way that makes it non-compliant w
 
 An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment.
 
+In the context of this document, remote disablement may refer to remote disablement of unwanted tracking protections, remote disablement of location tracking, or both.
+
+#### Remote Disablement of Unwanted Tracking Protections
+
+An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be accomplished by disabling the victim's unwanted tracking protection measures on their device, or by modifying the tag itself such that the victim's protection measures are unable to detect the tag.
+
+The ability to disable a victim’s protections introduces a medium impact, while the likelihood is medium, as it requires specific technical knowledge. Since execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While authentication measures and anti-malware software to detect and remove stalkerware can partially mitigate this risk, these protections are not foolproof.
+
+#### Remote Disablement of Location Tracking
+
+An attacker might misuse remote disablement of location tracking against a victim who is legitimately using a tag, as a form of harassment. This could be accomplished by using the victim's device to disconnect it from the tag, or by physically modifying the tag.
+
+The ability to disable a victim’s tracking tag introduces a low to medium impact, while the likelihood is medium, as it requires specific technical knowledge. Since execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While authentication measures and anti-malware software to detect and remove stalkerware can partially mitigate this risk, these protections are not foolproof.
+
 ## What is in scope
 
 ### Technologies
