@@ -269,7 +269,7 @@ To systematically assess the risks associated with different threats, we introdu
 | Delayed Activation of Trackers | Medium | High | Easy | High | Victims | No |
 | Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
 | Exploiting Gaps in OS-based Detection | High | High | Moderate | High | All users | Partial |
-| Spoofing Legitimate Devices | Medium | Medium | Moderate | Medium | Victims | No |
+| Spoofing Legitimate Devices (Impersonation/Replay Attack) | High/Medium | Low/High | Hard/Easy | Medium | Victims | No |
 | Heterogeneous Tracker Networks | High | Medium | Hard | Medium | Victims | No |
 
 ### Deploying Multiple Tags
@@ -306,11 +306,15 @@ Some detection systems trigger alerts only under specific conditions, such as wh
 
 ### Spoofing Legitimate Devices
 
-Attackers can modify tracker broadcasts to mimic legitimate tracking devices, allowing them to blend into crowd-sourced location tracking networks. By impersonating an authorized tracker, an attacker could inject false location data, misattribute tracker ownership, or evade detection by appearing as a trusted device. This tactic increases the difficulty of accurately identifying unauthorized tracking attempts.
+Attackers can modify tracker broadcasts to mimic legitimate tracking devices and successfully authenticate within crowd-sourced location tracking networks. By impersonating an authorized tracker, an attacker could inject false location data, misattribute tracker ownership, or evade detection by appearing as a trusted device. This tactic increases the difficulty of accurately identifying unauthorized tracking attempts and undermines the reliability of the network. Successfully executing this attack requires bypassing authentication mechanisms used to verify legitimate trackers, making it more technically challenging.
 
-Additionally, another spoofing scenario involves recording and replaying Bluetooth advertisements from a legitimate tracker. An attacker can capture a tracker's broadcast and retransmit it elsewhere, creating confusion about its actual location. This could be used to mislead users, interfere with tracking accuracy, or frame an innocent party by making it appear as though they are carrying a tracker when they are not.
+Additionally, another spoofing scenario involves recording and replaying Bluetooth advertisements from a legitimate tracker. An attacker can capture a tracker's broadcast and retransmit it elsewhere, creating confusion about its actual location. This could be used to mislead users, interfere with tracking accuracy, or frame an innocent party by making it appear as though they are carrying a tracker when they are not. Unlike the first attack, this approach does not require authentication, making it relatively easier to execute with readily available tools.
 
-Using machine-learning-based anomaly detection techniques can help distinguish genuine devices from potential tracking attempts by identifying inconsistencies in broadcast patterns. The impact of these attacks is medium, as users may be misled by falsified tracking data. However, the likelihood is medium, since executing a convincing spoof or replay attack requires technical expertise. The feasibility is moderate due to the necessary hardware and software requirements. This results in a medium-risk attack. Currently, no fully effective mitigation exists, but improvements in authentication mechanisms and anomaly detection may help reduce the risk.
+Using machine-learning-based anomaly detection techniques can help distinguish genuine devices from potential tracking attempts by identifying inconsistencies in broadcast patterns. The impact of these attacks varies:
+  - Impersonation attacks require defeating authentication mechanisms, making them less likely (low likelihood) but high impact if successful. These attacks are difficult to execute (hard feasibility) due to the need for significant technical expertise and specialized hardware/software.
+  - Replay attacks do not require authentication, making them easier to execute (high likelihood) but with a medium impact, as they can only mislead location tracking but do not compromise authentication itself. These attacks are relatively easy to carry out (easy feasibility) using off-the-shelf Bluetooth scanning tools.
+
+Currently, no fully effective mitigation exists. However, improvements in authentication mechanisms, such as cryptographic signing of broadcasts, and anomaly detection techniques may help reduce the risk.
 
 ### Heterogeneous Tracker Networks
 
