@@ -265,7 +265,6 @@ To systematically assess the risks associated with different threats, we introdu
 | Remote Advertisement Monitoring | High | High | Easy | High | All users | No |
 | Non-Compliant Tags | High | Medium | Moderate | Medium | Victims | No |
 | Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
-| Rotating Tracker IDs | High | High | Easy | High | Victims | Partial |
 | Delayed Activation of Trackers | Medium | High | Easy | High | Victims | No |
 | Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
 | Exploiting Gaps in OS-based Detection | High | High | Moderate | High | All users | Partial |
@@ -282,15 +281,17 @@ Bluetooth advertisement packets are not encrypted, so any device with Bluetooh s
 
 ### Non-compliant tags
 
-An attacker might physically modify a tag in a way that makes it non-compliant with the standard (e.g. disabling a speaker or vibration). An attacker might make alterations to a tag's firmware that make it non-compliant with the standard. This bypasses key protections entirely, making the impact high by preventing victims from discovering hidden trackers. Although technical modifications require some expertise, they are achievable with moderate effort, making the likelihood medium and feasibility moderate. As a result, the overall risk remains medium. Current mitigation methods are incomplete, though research continues on detecting such rogue devices.
+An attacker might physically modify a tag or alter its firmware in ways that make it non-compliant with standard tracking protections, bypassing key security mechanisms and making unauthorized tracking harder to detect. Physical modifications may include disabling the speaker or vibration alert, preventing victims from discovering hidden trackers, or shielding and altering the antenna to reduce transmission range and make detection more difficult.
+
+Firmware-based modifications involve altering a tag’s software to deviate from standard behavior. Attackers may disable or modify alert triggers, preventing automatic notifications from being sent to users. They may also manipulate advertisement intervals to reduce detection opportunities, allowing the tag to evade tracking for extended periods.
+
+One method attackers use is excessively fast rotation of Bluetooth MAC addresses or other tracker identifiers. While rotating IDs periodically is a standard privacy feature, rapid rotation (such as changing identifiers every minute instead of every few hours) disrupts detection systems that rely on tracking unknown device persistence. This makes it difficult to distinguish between legitimate and non-compliant trackers, ultimately undermining detection efforts.
+
+These modifications bypass key protections, making it harder for victims to detect tracking, leading to a high impact. While some alterations, such as hardware modifications, require expertise, firmware-based changes can be achieved with moderate effort, resulting in a medium likelihood. The feasibility of executing such attacks varies. Physical modifications require hardware expertise, while firmware changes are more accessible, making feasibility moderate overall. Given this combination of factors, the overall risk level is medium. Current mitigation methods remain incomplete, though research continues on detecting rogue devices through anomaly detection, behavioral analysis, and hardware integrity checks.
 
 ### Misuse of Remote Disablement
 
 An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment. The ability to disable a victim’s protections introduces a medium impact, while the likelihood is medium, as it requires specific technical knowledge. Since execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While authentication measures can partially mitigate this risk, these protections are not foolproof.
-
-### Rotating Tracker IDs
-
-Attackers may use dynamic identifier changes, such as rotating Bluetooth MAC addresses, to evade detection. This makes it difficult for detection systems relying on persistent unknown device identification. Pattern recognition techniques capable of detecting clusters of devices exhibiting ID rotation behaviors can help mitigate this. The impact is high, as it directly undermines detection mechanisms, while the likelihood is high, given that this is a widely used evasion technique. Since implementing ID rotation is straightforward, feasibility is easy, making this a high-risk attack. While time-based correlation methods offer partial mitigation, an ongoing arms race exists between detection and circumvention.
 
 ### Delayed Activation of Trackers
 
