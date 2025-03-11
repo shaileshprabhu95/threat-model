@@ -314,7 +314,7 @@ Using machine-learning-based anomaly detection techniques can help distinguish g
   - Impersonation attacks require defeating authentication mechanisms, making them less likely (low likelihood) but high impact if successful. These attacks are difficult to execute (hard feasibility) due to the need for significant technical expertise and specialized hardware/software.
   - Replay attacks do not require authentication, making them easier to execute (high likelihood) but with a medium impact, as they can only mislead location tracking but do not compromise authentication itself. These attacks are relatively easy to carry out (easy feasibility) using off-the-shelf Bluetooth scanning tools.
 
-Currently, no fully effective mitigation exists. However, improvements in authentication mechanisms, such as cryptographic signing of broadcasts, and anomaly detection techniques may help reduce the risk.
+Currently, no fully effective mitigation exists. However, improvements in authentication mechanisms, such as cryptographic signing of broadcasts, and anomaly detection techniques may help reduce the risk. Given the combination of impact, likelihood, and feasibility, impersonation attacks present a medium overall risk due to their high impact but low likelihood and difficulty of execution, while replay attacks pose a medium risk as well, owing to their higher likelihood but medium impact.
 
 ### Heterogeneous Tracker Networks
 
