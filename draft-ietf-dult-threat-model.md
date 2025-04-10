@@ -225,11 +225,11 @@ The above taxonomy and threat analysis focus on location tracking tags. They are
 
 ## Possible Methods to Circumvent DULT Protocol
 
-There are several different ways an attacker could attempt to circumvent the DULT protocol in order to track a victim without their consent. These include deploying multiple tags to follow a single victim and using a non-compliant tag (e.g. speaker disabled, altered firmware, spoofed tag). There are also other potential concerns of abuse of the DULT Protocol, such as remotely disabling a victim's tracking tag.
+There are several different ways an attacker could attempt to circumvent the DULT protocol in order to track a victim without their consent. These include deploying multiple tags to follow a single victim and using a non-conformant tag (e.g. speaker disabled, altered firmware, spoofed tag). There are also other potential concerns of abuse of the DULT Protocol, such as remotely disabling a victim's tracking tag.
 
 ### Threat Prioritization Framework for DULT Threat Model
 
-Threats in the DULT ecosystem vary in severity, feasibility, and likelihood, affecting users in different ways. Some threats enable long-term tracking, while others exploit gaps in detection mechanisms or leverage non-compliant devices. To assess and prioritize these risks, the following framework classifies threats based on their impact, likelihood, feasibility, affected users, and the availability of mitigations. A Threat Matrix is included that provides a structured assessment of known threats and their associated risks. This categorization helps in understanding the challenges posed by different tracking techniques and their potential mitigations.
+Threats in the DULT ecosystem vary in severity, feasibility, and likelihood, affecting users in different ways. Some threats enable long-term tracking, while others exploit gaps in detection mechanisms or leverage non-conformant devices. To assess and prioritize these risks, the following framework classifies threats based on their impact, likelihood, feasibility, affected users, and the availability of mitigations. A Threat Matrix is included that provides a structured assessment of known threats and their associated risks. This categorization helps in understanding the challenges posed by different tracking techniques and their potential mitigations.
 
 ### Threat Matrix
 
@@ -263,7 +263,7 @@ To systematically assess the risks associated with different threats, we introdu
 | ------ | --------------------- | ------------------------- | -------------------------------- | ------------------------- | -------------- | ------------------------------ |
 | Deploying Multiple Tags | High | High	| Easy | High | Victims | Partial |
 | Remote Advertisement Monitoring | High | High | Easy | High | All users | No |
-| Non-Compliant Tags | High | Medium | Moderate | Medium | Victims | No |
+| Non-Conformant Tags | High | Medium | Moderate | Medium | Victims | No |
 | Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
 | Rotating Tracker IDs | High | High | Easy | High | Victims | Partial |
 | Delayed Activation of Trackers | Medium | High | Easy | High | Victims | No |
@@ -280,9 +280,9 @@ When an attacker deploys tracking tags to follow a victim, they may deploy more 
 
 Bluetooth advertisement packets are not encrypted, so any device with Bluetooh scanning capabilities in proximity to a location tracking tag can receive Bluetooth advertisement packets. If an attacker is able to link an identifier in an advertisement packet to a particular tag, they may be able to use this information to track the tag over time, and potentially by proxy the victim or other individual, without their consent. Tracking tags typically rotate any identifiers associated with the tag, but the duration with which they rotate could be up to 24 hours (see e.g. {{!I-D.detecting-unwanted-location-trackers}}). Beck et al. have [demonstrated](https://eprint.iacr.org/2023/1332.pdf) a technological solution that employs secret sharing and error correction coding that would reduce this to 60 seconds. However, work must investigate how robust this scheme is to the presence of multiple tags (see {{deploying-multiple-tags}}). This attack has a high impact, as it allows persistent surveillance while circumventing built-in protections. Given that capturing Bluetooth signals is trivial using common scanning tools, the likelihood is high, and the feasibility is easy, making it a high-risk attack. While rotating identifiers provides partial mitigation, attackers can still use advanced correlation techniques to bypass this defense.
 
-### Non-compliant tags
+### Non-conformant tags
 
-An attacker might physically modify a tag in a way that makes it non-compliant with the standard (e.g. disabling a speaker or vibration). An attacker might make alterations to a tag's firmware that make it non-compliant with the standard. This bypasses key protections entirely, making the impact high by preventing victims from discovering hidden trackers. Although technical modifications require some expertise, they are achievable with moderate effort, making the likelihood medium and feasibility moderate. As a result, the overall risk remains medium. Current mitigation methods are incomplete, though research continues on detecting such rogue devices.
+An attacker might physically modify a tag in a way that makes it non-conformant with the standard (e.g. disabling a speaker or vibration). An attacker might make alterations to a tag's firmware that make it non-conformant with the standard. This bypasses key protections entirely, making the impact high by preventing victims from discovering hidden trackers. Although technical modifications require some expertise, they are achievable with moderate effort, making the likelihood medium and feasibility moderate. As a result, the overall risk remains medium. Current mitigation methods are incomplete, though research continues on detecting such rogue devices.
 
 ### Misuse of Remote Disablement
 
