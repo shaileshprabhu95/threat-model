@@ -400,9 +400,9 @@ In order to effectively prevent unwanted location tracking, users should be able
 
 To reduce alert fatigue and improve user experience, implementations should allow users to snooze passive notifications from tracking tags that have been explicitly marked as trusted or friendly. This is particularly useful in scenarios where users regularly encounter the same tag (e.g., a family member's keys or a shared vehicle tag).
 
-Such snoozed tags may also be de-prioritized or grouped separately during active scans, helping users focus on unfamiliar or potentially malicious trackers. Systems should make it easy to manage snoozed devices and review or revoke trust status as needed. It is also advisable to implement revalidation mechanisms, for example, resuming notifications after a period of time or when unexpected tag movement is detected to prevent long-term blind spots.
+Such snoozed tags may also be de-prioritized or grouped separately during active scans, helping users focus on unfamiliar or potentially malicious trackers. Platforms should make it easy to manage snoozed devices and review or revoke trust status as needed. It is also advisable to implement revalidation mechanisms, for example, resuming notifications after a period of time to prevent long-term blind spots.
 
-Some platforms may wish to implement family sharing or shared ownership models, where multiple users can be associated with a single tracker. However, this introduces the risk of abuse (e.g., a malicious user adding a victim to the shared list), and therefore should be approached with caution and abuse mitigation in mind. These features are optional and may vary by platform.
+Some platforms may wish to implement family sharing or shared ownership models, where multiple users can be associated with a single tracker. However, this introduces the risk of abuse (e.g., an attacker adding a victim to the shared list in order to avoid triggering passive notifications), and therefore should be approached with caution and abuse mitigation in mind. These features are optional and may vary by platform.
 
 ### Privacy and Security Requirements (TODO)
 
