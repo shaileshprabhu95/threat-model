@@ -318,7 +318,7 @@ Attackers may use a mix of tracking devices from different manufacturers (e.g., 
 
 ### Technologies
 
-The scope of this threat analysis includes any accessory that is small and not easily discoverable and able to transmit its location to other consumer devices.
+The scope of this threat analysis includes any accessory that is small and not easily discoverable and able to transmit its location to other consumer devices. Larger and/or easily discoverable devices such as laptops with tracking tag integrations may also choose to implement the protocol.
 
 ### Attacker Profiles
 
