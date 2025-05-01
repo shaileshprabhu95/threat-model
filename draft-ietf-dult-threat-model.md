@@ -267,11 +267,10 @@ To systematically assess the risks associated with different threats, we introdu
 | ------ | --------------------- | ------------------------- | -------------------------------- | ------------------------- | -------------- | ------------------------------ |
 | Deploying Multiple Tags | High | High	| Easy | High | Victims | Partial |
 | Remote Advertisement Monitoring | High | High | Easy | High | All users | No |
-| Non-Conformant Tags | High | Medium | Moderate | Medium | Victims | No |
+| Physically Modifying Tags | High | Medium | Moderate | Medium | Victims | No |
+| Firmware Modifications | High | Low | Hard | Medium | Victims | Partial |
 | Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
-| Delayed Activation of Trackers | Medium | High | Easy | High | Victims | No |
 | Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
-| Exploiting Gaps in OS-based Detection | High | High | Moderate | High | All users | Partial |
 | Impersonation Attack | High | Low | Hard | Medium | Victims | No |
 | Replay Attack | Medium | High | Easy | Medium | Victims | No |
 | Heterogeneous Tracker Networks | High | Medium | Hard | Medium | Victims | No |
@@ -286,31 +285,21 @@ Bluetooth advertisement packets are not encrypted, so any device with Bluetooth 
 
 While rotating identifiers provides partial mitigation, attackers can still use advanced correlation techniques, such as signal fingerprinting, timing analysis, and multi-sensor triangulation, to bypass this defense. These methods leverage unique transmission characteristics, RSSI (Received Signal Strength Indicator) variations, and environmental factors to probabilistically link rotating identifiers back to a single device over time. Prior research, such as Beck et al., has [demonstrated](https://eprint.iacr.org/2023/1332.pdf) how statistical models can be used to correlate Bluetooth signals even when identifiers change frequently.
 
-### Non-conformant tags
+### Physically Modifying Tags
 
-An attacker might physically modify a tag or alter its firmware in ways that make it non-conformant with standard tracking protections, bypassing key security mechanisms and making unauthorized tracking harder to detect. Physical modifications may include disabling the speaker or vibration alert, preventing victims from discovering hidden trackers, or shielding and altering the antenna to reduce transmission range and make detection more difficult.
+An attacker might physically modify a tag in ways that make it non-conformant with the DULT protocol. Physical modifications may include disabling the speaker or vibration alert or shielding and altering the antenna to reduce transmission range. These modifications can make it more difficult for victims to discover hidden trackers, leading to a high impact. Hardware modifications require some expertise, resulting in a medium likelihood and medium feasibility.  Given this combination of factors, the overall risk level is medium. 
 
-Firmware-based modifications involve altering a tag’s software to deviate from standard behavior. Attackers may disable or modify alert triggers, preventing automatic notifications from being sent to users. They may also manipulate advertisement intervals to reduce detection opportunities, allowing the tag to evade tracking for extended periods.
+### Accessory Firmware Modifications
 
-One method attackers use is excessively fast rotation of Bluetooth MAC addresses or other tracker identifiers. While rotating IDs periodically is a standard privacy feature, rapid rotation (such as changing identifiers every minute instead of every few hours) disrupts detection systems that rely on tracking unknown device persistence. This makes it difficult to distinguish between legitimate and non-compliant trackers, ultimately undermining detection efforts.
+The DULT protocol (see {{!I-D.draft-ietf-dult-accessory-protocol}}) will specify that accessory firmware images MUST be authenticated, and that accessories MUST verify the integrity and origin of firmware. However, if these protections were to be bypassed, an accessory's software could be altered to deviate from standard behavior. Attackers may manipulate advertisement intervals to reduce detection opportunities, allowing the tag to evade tracking for extended periods, or rotate IDs rapidly, disrupting detection systems that rely on tracking unknown device persistence. Firmware-based changes would have high impact, but also have hard feasibility, which makes their likelihood low and the overall risk level medium. 
 
-These modifications bypass key protections, making it harder for victims to detect tracking, leading to a high impact. While some alterations, such as hardware modifications, require expertise, firmware-based changes can be achieved with moderate effort, resulting in a medium likelihood. The feasibility of executing such attacks varies. Physical modifications require hardware expertise, while firmware changes are more accessible, making feasibility moderate overall. Given this combination of factors, the overall risk level is medium. Current mitigation methods remain incomplete, though research continues on detecting rogue devices through anomaly detection, behavioral analysis, and hardware integrity checks.
-
-### Misuse of Remote Disablement
+### Attacker Accessory Remote Disablement
 
 An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment. The ability to disable a victim’s protections introduces a medium impact, while the likelihood is medium, as it requires specific technical knowledge. Since execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While authentication measures can partially mitigate this risk, these protections are not foolproof.
-
-### Delayed Activation of Trackers
-
-Some tracking devices remain inactive for extended periods before starting to broadcast, making them harder to detect during initial scans. This allows attackers to delay detection until the victim has traveled a significant distance. Historical tracking behavior analysis, rather than solely real-time scanning, is necessary to mitigate this threat. The impact is medium, as it temporarily bypasses detection systems, while the likelihood is high, given how easy it is to implement such a delay in firmware. Since execution requires minimal effort, feasibility is easy, making this a high-risk attack. No effective mitigation currently exists, though long-term behavioral analysis could help detect such trackers.
 
 ### Multi-Tag Correlation Attack
 
 By distributing multiple tracking tags across locations frequently visited by a target (home, workplace, etc.), attackers can reconstruct movement patterns over time. Traditional tracking prevention measures focus on individual devices, making this method difficult to counter. Cross-tag correlation analysis could improve detection of recurring unknown trackers near a user. The impact is high, as it enables persistent monitoring, while the likelihood is medium, since multiple devices are required. Given that execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While no effective mitigation exists, coordinated scanning across devices could help detect recurring unknown trackers.
-
-### Exploiting Gaps in OS-Based Detection
-
-Some detection systems trigger alerts only under specific conditions, such as when motion is detected. Attackers can adjust device behavior to avoid detection during these periods. A more consistent, vendor-independent approach to unwanted tracking alerts would help reduce blind spots. The impact is high, as it results in gaps in protection across different platforms, while the likelihood is high, given OS fragmentation and differences in security policies. With feasibility at a moderate level, this results in a high-risk attack. While cross-platform threat modeling provides partial mitigation, detection gaps remain.
 
 ### Impersonation Attack
 
