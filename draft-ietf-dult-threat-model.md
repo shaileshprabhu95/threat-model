@@ -45,25 +45,29 @@ informative:
 
 --- abstract
 
-Lightweight location tracking tags are in wide use to allow users to locate items. These tags function as a component of a crowdsourced tracking network in which devices belonging to other network users (e.g., phones) report which tags they see and their location, thus allowing the owner of the tag to determine where their tag was most recently seen. While there are many legitimate uses of these tags, they are also susceptible to misuse for the purpose of stalking and abuse. A protocol that allows others to detect unwanted location trackers must incorporate an understanding of the unwanted tracking landscape today. This document provides a threat analysis for this purpose, will define what is in and out of scope for the unwanted location tracking protocols, and will provide some design considerations for implementation of protocols to detect unwanted location tracking.
+Lightweight location tracking tags are in wide use to allow users to locate items. These tags function as a component of a crowdsourced tracking network in which devices belonging to other network users (e.g., phones) report which tags they see and their location, thus allowing the owner of the tag to determine where their tag was most recently seen. While there are many legitimate uses of these tags, they are also susceptible to misuse for the purpose of stalking and abuse. A protocol that allows others to detect unwanted location trackers must incorporate an understanding of the unwanted tracking landscape today. This document provides a threat analysis for this purpose, including a taxonomy of unwanted tracking and potential attacks against detection of unwanted location tracking (DULT) protocols. The document defines what is in and out of scope for the unwanted location tracking protocols, and provides design requirements, constraints, and considerations for implementation of protocols to detect unwanted location tracking.
 
 --- middle
 
 # Introduction
 
-Location tracking tags are widely-used devices that allow users to locate items. These tags function as a component of a crowdsourced tracking network in which devices belonging to other network users (e.g., phones) report on the location of tags they have seen. At a high level, this works as follows:
+Location tracking tags are devices that allow users to locate items. These tags function as a component of a crowdsourced tracking network in which devices belonging to other network users (e.g., phones) report on the location of tags they have seen. At a high level, this works as follows:
 
-  - Tags ("accessories") transmit an advertisement payload containing accessory-specific information. The payload also indicates whether the accessory is separated from its owner and thus potentially lost.
+  - Tags ("accessories") transmit an advertisement payload containing accessory-specific information. The payload indicates whether the accessory is separated from its owner and thus potentially lost.
   - Devices belonging to other users ("non-owner devices") observe those payloads and if the payload is in a separated mode, reports its location to some central service.
   - The owner queries the central service for the location of their accessory.
 
-A naive implementation of this design exposes both a tag’s user and anyone who might be targeted for location tracking by a tag’s user, to considerable privacy risk. In particular:
+A naive implementation of this design exposes both a tag's user and anyone who might be targeted for location tracking by a tag's user, to considerable privacy risk. In particular:
 
   - If accessories simply have a fixed identifier that is reported back to the tracking network, then the central server is able to track any accessory without the user's assistance, which is clearly undesirable.
   - Any attacker who can guess a tag ID can query the central server for its location.
   - An attacker can surreptitiously plant an accessory on a target and thus track them by tracking their "own" accessory.
 
-In order to minimize these privacy risks, it is necessary to analyze and be able to model different privacy threats. This document uses a flexible framework to provide analysis and modeling of different threat actors, as well as models of potential victims based on their threat context. It defines how these attacker and victim persona models can be combined into threat models. It is intended to work in concert with the requirements defined in {{!I-D.detecting-unwanted-location-trackers}}, which facilitate detection of unwanted tracking tags.
+While location tracking tags have existed for over a decade, they became especially widely-used in the Global North in the last several years as crowdsourced networks were deployed by major smart phone manufacturers. However, due to their reliance on a high density of non-owner devices for the network to be effective and the relative cost of location tracking tags, location tracker use in the Global South is typically limited to affluent communities. If the cost of non-owner devices and location tracking tags decrease, an uptick of unwanted location tracking could also occur in contexts where it is currently infeasible.
+
+Detecting unwanted location tracking is currently left to individual tracking tag manufacturers and software on non-owner devices. Each manufacturer and smartphone operating system has different implementations to prevent unwanted location tracking, which may or may not be compatible with other manufacturers or operating systems. The goal of the IETF Detecting Unwanted Location Tracking (DULT) working group is to standardize a protocol between location tracking tags and non-owner devices.
+
+In order to standardize a protocol for detecting unwanted location tracking, thus minimizing the privacy risks described above, it is necessary to analyze and be able to model different privacy threats. This document includes: 1) a taxonomy of unwanted location tracking, 2) methods attackers could use to circumvent unwanted location tracking protocols, and 3) design considerations for implementing unwanted location tracking protocols. The taxonomy of unwanted location tracking uses a flexible framework to provide analysis and modeling of different threat actors, as well as models of potential victims based on their threat context. It defines how these attacker and victim persona models can be combined into threat models. The section on methods to circumvent detection of unwanted location tracking includes a threat matrix and description of several different possible attack vectors. Finally, the design considerations section focuses on specific requirements and constraints for successfully detecting unwanted location tracking, alerting users, and providing guidance on disabling trackers (if desired). This threat model document is intended to inform the work of the implementation of the DULT protocol as described in {{!I-D.draft-ietf-dult-accessory-protocol}} and {{!I-D.draft-ietf-dult-finding}}.
 
 # Conventions and Definitions
 
@@ -75,7 +79,7 @@ In order to minimize these privacy risks, it is necessary to analyze and be able
 - **active scanning**: a search for location trackers manually initiated by a user
 - **passive scanning**: a search for location trackers running in the background, often accompanied by notifications for the user
 - **tracking tag**: a small device that is not easily discoverable and transmits location data to other devices.
-- **easily discoverable**: device is larger than 30 cm in at least one dimension, device is larger than 18 cm x 13 xm in two of its dimensions, device is larger than 250 cm<sup>3</sup> in three-dimensional space
+- **easily discoverable**: a device that is larger than 30 cm in at least one dimension, larger than 18 cm x 13 xm in two of its dimensions, and/or larger than 250 cm<sup>3</sup> in three-dimensional space
 
 # Security Considerations
 
