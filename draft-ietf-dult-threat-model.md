@@ -276,7 +276,7 @@ To systematically assess the risks associated with different threats, we introdu
 | Impersonation Attack | High | Low | Hard | Medium | Victims | No |
 | Replay Attack | Medium | High | Easy | Medium | Victims | No |
 | Heterogeneous Tracker Networks | High | Medium | Hard | Medium | Victims | No |
-| Unauthorized Enrollment in a Crowdsourced Tracking Network | High | Medium | Moderate | High | Victims | Partial | 
+| Unauthorized Enrollment in a Crowdsourced Tracking Network | High | Medium | Moderate | High | Victims | Partial |
 
 ### Deploying Multiple Tags
 
