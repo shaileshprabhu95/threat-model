@@ -276,6 +276,7 @@ To systematically assess the risks associated with different threats, we introdu
 | Impersonation Attack | High | Low | Hard | Medium | Victims | No |
 | Replay Attack | Medium | High | Easy | Medium | Victims | No |
 | Heterogeneous Tracker Networks | High | Medium | Hard | Medium | Victims | No |
+| Unauthorized Enrollment in a Crowdsourced Tracking Network | High | Medium | Moderate | High | Victims | No | 
 
 ### Deploying Multiple Tags
 
@@ -324,6 +325,16 @@ In addition to impersonating legitimate tracking devices (see {{impersonation-at
 ### Heterogeneous Tracker Networks
 
 Attackers may use a mix of tracking devices from different manufacturers (e.g., Apple AirTags, Tile, Samsung SmartTags) to exploit gaps in vendor-specific tracking protections. Many detection systems are brand-dependent, making them ineffective against mixed tracker deployments. Establishing a cross-vendor framework for detection and alerts would enhance protection. The impact is high, as it circumvents traditional defenses, while the likelihood is medium, since deploying multiple brands requires effort. With feasibility at a hard level, this remains a medium-risk attack. No effective mitigation currently exists, though research into cross-technology threat detection is ongoing.
+
+### Unauthorized Enrollment in a Crowdsourced Tracking Network
+
+Recent research has demonstrated a novel attack in which adversaries can impersonate a legitimate tracking device, such as an Apple AirTag, and illegitimately enroll in a crowdsourced location tracking network without the manufacturer’s involvement or user consent. In this attack, a general-purpose device such as a smartphone, IoT gadget, or laptop is configured to emulate the behavior of a lost tracker. As a result, nearby Apple devices relay the impersonator’s location through the Find My network infrastructure. Although the impersonating device is not an official AirTag, it successfully exploits the global network of relaying Apple devices to enable continuous, remote tracking.
+
+This type of attack raises significant privacy and security concerns. By bypassing manufacturer-level access controls, the attacker is able to leverage large-scale tracking infrastructure without deploying any physical hardware. Because the device behaves like a legitimate AirTag, it avoids traditional detection mechanisms that rely on identifying specific tracker types. The ability to embed the tracking logic in general-purpose devices makes this threat especially insidious in scenarios where hardware scanning is assumed to be sufficient.
+
+The impact of this attack is high, as it enables real-time location tracking through a network of unsuspecting users. The likelihood is medium, since it requires an understanding of the underlying network protocols and the ability to replicate tracker behavior in software. The feasibility is moderate. While the required capabilities are within reach for researchers and advanced adversaries, they are non-trivial. As a result, the overall risk level is considered high. Currently, no known mitigation fully addresses this issue. The Find My network and similar systems do not authenticate whether a broadcasting tracker is genuine, making them susceptible to spoofing. This highlights the need for protocol-level authentication, stronger beacon validation, and potentially rate-limiting of unverified tracker traffic to prevent future abuse.
+
+This attack was demonstrated by researchers at George Mason University and is described in their 2025 report, Find My Hacker: How Apple’s Network Can Be a Potential Tracking Tool (https://cec.gmu.edu/news/2025-02/find-my-hacker-how-apples-network-can-be-potential-tracking-tool).
 
 ## What is in scope
 
