@@ -276,7 +276,7 @@ To systematically assess the risks associated with different threats, we introdu
 | Impersonation Attack | High | Low | Hard | Medium | Victims | No |
 | Replay Attack | Medium | High | Easy | Medium | Victims | No |
 | Heterogeneous Tracker Networks | High | Medium | Hard | Medium | Victims | No |
-| Unauthorized Enrollment in a Crowdsourced Tracking Network | High | Medium | Moderate | High | Victims | No | 
+| Unauthorized Enrollment in a Crowdsourced Tracking Network | High | Medium | Moderate | High | Victims | Partial | 
 
 ### Deploying Multiple Tags
 
@@ -332,7 +332,7 @@ Recent research has demonstrated a novel attack in which adversaries can imperso
 
 This type of attack raises significant privacy and security concerns. By bypassing manufacturer-level access controls, the attacker is able to leverage large-scale tracking infrastructure without deploying any physical hardware. Because the device behaves like a legitimate AirTag, it avoids traditional detection mechanisms that rely on identifying specific tracker types. The ability to embed the tracking logic in general-purpose devices makes this threat especially insidious in scenarios where hardware scanning is assumed to be sufficient.
 
-The impact of this attack is high, as it enables real-time location tracking through a network of unsuspecting users. The likelihood is medium, since it requires an understanding of the underlying network protocols and the ability to replicate tracker behavior in software. The feasibility is moderate. While the required capabilities are within reach for researchers and advanced adversaries, they are non-trivial. As a result, the overall risk level is considered high. Currently, no known mitigation fully addresses this issue. The Find My network and similar systems do not authenticate whether a broadcasting tracker is genuine, making them susceptible to spoofing. This highlights the need for protocol-level authentication, stronger beacon validation, and potentially rate-limiting of unverified tracker traffic to prevent future abuse.
+The impact of this attack is high, as it enables real-time location tracking by exploiting the behavior of crowdsourced location networks without requiring physical tracker hardware. The likelihood is medium, given that the attack requires an understanding of the protocol and the ability to replicate tracker behavior in software. The feasibility is moderate; while the underlying techniques have been demonstrated by researchers, the attack depends on platform-specific capabilities such as unrestricted Bluetooth broadcasting. As a result, the overall risk level is considered high. While there is currently no mitigation at the protocol level, some operating systems restrict low-level BLE broadcasting unless elevated privileges are granted, offering partial protection. There is a need for protocol-level authentication, stronger validation of tracker identities, and potential rate-limiting of unverified broadcasts to reduce the risk of abuse.
 
 This attack was demonstrated by researchers at George Mason University and is described in their 2025 report, Find My Hacker: How Apple’s Network Can Be a Potential Tracking Tool (https://cec.gmu.edu/news/2025-02/find-my-hacker-how-apples-network-can-be-potential-tracking-tool).
 
