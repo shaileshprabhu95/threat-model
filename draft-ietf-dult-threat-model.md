@@ -316,7 +316,7 @@ By distributing multiple tracking tags across locations frequently visited by a 
 
 Attackers can potentially impersonate legitimate tracking devices and successfully authenticate within crowd-sourced location tracking networks. By impersonating an authorized tracker, an attacker could inject false location data, misattribute tracker ownership, or evade detection by appearing as a trusted device. This tactic increases the difficulty of accurately identifying unauthorized tracking attempts and undermines the reliability of the network. Currently, no fully effective mitigation exists. However, improvements in authentication mechanisms, such as cryptographic signing of broadcasts, and anomaly detection techniques may help reduce the risk.
 
-Successfully executing this attack requires bypassing authentication mechanisms used to verify legitimate trackers, making it technically challenging. Impersonation attacks require defeating authentication mechanisms, making them less likely (low likelihood) but high impact if successful. These attacks are difficult to execute (hard feasibility) due to the need for significant technical expertise and specialized hardware/software. Given the combination of impact, likelihood, and feasibility, impersonation attacks present a medium overall risk due to their high impact but low likelihood and difficulty of execution.
+Impersonation attacks require defeating authentication mechanisms, making them less likely (low likelihood) but high impact if successful. These attacks are difficult to execute (hard feasibility) due to the need for significant technical expertise and specialized hardware/software. Given the combination of impact, likelihood, and feasibility, impersonation attacks present a medium overall risk due to their high impact but low likelihood and difficulty of execution.
 
 ### Replay Attack
 
@@ -324,7 +324,7 @@ In addition to impersonating legitimate tracking devices (see {{impersonation-at
 
 ### Heterogeneous Tracker Networks
 
-Attackers may use a mix of tracking devices from different manufacturers (e.g., Apple AirTags, Tile, Samsung SmartTags) to exploit gaps in vendor-specific tracking protections. Many detection systems are brand-dependent, making them ineffective against mixed tracker deployments. Establishing a cross-vendor framework for detection and alerts would enhance protection. The impact is high, as it circumvents traditional defenses, while the likelihood is medium, since deploying multiple brands requires effort. With feasibility at a hard level, this remains a medium-risk attack. No effective mitigation currently exists, though research into cross-technology threat detection is ongoing.
+Attackers may use a mix of tracking devices from different manufacturers (e.g., Apple AirTags, Tile, Samsung SmartTags) to exploit gaps in vendor-specific tracking protections. Many detection systems are brand-dependent, making them ineffective against mixed tracker deployments. The goal of the DULT protocol is to enable a cross-vendor framework; however, any slight differences in potential implementation could be exploited. The impact is high, as it circumvents traditional defenses, while the likelihood is medium, since deploying multiple brands requires effort. With feasibility at a hard level, this remains a medium-risk attack. This attack can be mitigated by manufacturers adopting the DULT protocol and ensuring that the DULT protocol is sufficiently clear to minimize gaps in vendor-specific tracking protections.
 
 ## What is in scope
 
