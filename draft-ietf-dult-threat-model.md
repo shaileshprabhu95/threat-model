@@ -133,12 +133,6 @@ Any of the threat analyses above could be affected by placement of the tag(s). F
     - Tags nearby but not used for unwanted location tracking (e.g. false positives by companions or on transit). While this is not an attack vector in its own right, repeated false positives may discourage a victim from treating alerts seriously.
     - Multiple tags using multiple types of placement. This attack vector may trick a victim into believing that they have fully addressed the attack when they have not. It also allows for a diversity of monitoring types (e.g. monitoring the victim's precise location, monitoring a child's routine, monitoring car usage).
 
-Anticipation, or lack thereof, of unwanted tracking, may affect the threat and the attack. If the victim does not realize that they are at risk (as is common early in an abusive relationship, or if a victim is being stalked by a stranger), they may be less likely to use active scanning tools or understand the implications of detected tags.
-
-  - Anticipation of unwanted tracking
-    - High anticipation: The victim believes that an attacker is tracking or may be tracking their location.
-    - Low anticipation: The victim is unaware or does not believe that an attacker is tracking or may be tracking their location.
-
 ### Example scenarios with analyses TODO: expand scenarios to incorporate expanded taxonomy
 
 The following scenarios are composite cases based upon reports from the field. They are intended to illustrate different angles of the problem. They are not only technological, but meant to provide realistic insights into the constraints of people being targeted through these tags. There is no identifying information for any real person contained within them. In accordance with research on [how designers understand personas](https://dl.acm.org/doi/10.1145/2207676.2208573), the characters are given non-human names without attributes such as gender or race.
