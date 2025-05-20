@@ -269,6 +269,7 @@ To systematically assess the risks associated with different threats, we introdu
 | Remote Advertisement Monitoring | High | High | Easy | High | All users | No |
 | Physically Modifying Tags | High | Medium | Moderate | Medium | Victims | No |
 | Firmware Modifications | High | Low | Hard | Medium | Victims | Partial |
+| Attacker Accessory Disablement | Medium | Medium | Easy | Medium | Victims | Partial |
 | Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
 | Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
 | Impersonation Attack | High | Low | Hard | Medium | Victims | No |
@@ -293,9 +294,9 @@ An attacker might physically modify a tag in ways that make it non-conformant wi
 
 The DULT protocol (see {{!I-D.draft-ietf-dult-accessory-protocol}}) will specify that accessory firmware images MUST be authenticated, and that accessories MUST verify the integrity and origin of firmware. However, if these protections were to be bypassed, an accessory's software could be altered to deviate from standard behavior. Attackers may manipulate advertisement intervals to reduce detection opportunities, allowing the tag to evade tracking for extended periods, or rotate IDs rapidly, disrupting detection systems that rely on tracking unknown device persistence. Firmware-based changes would have high impact, but also have hard feasibility, which makes their likelihood low and the overall risk level medium. 
 
-### Attacker Accessory Remote Disablement
+### Attacker Accessory Disablement
 
-An attacker might misuse remote disablement features to prevent a victim detecting or locating a tag. This could be used to prevent a victim locating an attacker's tag, or could be used by an attacker against a victim's tag as a form of harassment. The ability to disable a victim’s protections introduces a medium impact, while the likelihood is medium, as it requires specific technical knowledge. Since execution is moderately complex, feasibility is moderate, leading to a medium-risk attack. While authentication measures can partially mitigate this risk, these protections are not foolproof.
+An attacker might intentionally disable their location tracking tag to make it harder for a victim to detect and/or locate the tag. This could be done periodically or permanently and either remotely or using a [physical device](https://undetectag.com/products/undetectag). Feasibility of this attack is easy, and the likelihood is medium, as it requires some specific knowledge (i.e. victim is searching for tag) or specific hardware.  The impact is medium as the tag can still be detected and physically located, though it may be more difficult to do so. The risk level is medium. The impact of this attack can be partially mitigated by minimizing the time needed to detect unwanted location tracking.
 
 ### Multi-Tag Correlation Attack
 
