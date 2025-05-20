@@ -296,7 +296,11 @@ The DULT protocol (see {{!I-D.draft-ietf-dult-accessory-protocol}}) will specify
 
 ### Attacker Accessory Disablement
 
-An attacker might intentionally disable their location tracking tag to make it harder for a victim to detect and/or locate the tag. This could be done periodically or permanently and either remotely or using a [physical device](https://undetectag.com/products/undetectag). Feasibility of this attack is easy, and the likelihood is medium, as it requires some specific knowledge (i.e. victim is searching for tag) or specific hardware.  The impact is medium as the tag can still be detected and physically located, though it may be more difficult to do so. The risk level is medium. The impact of this attack can be partially mitigated by minimizing the time needed to detect unwanted location tracking.
+An attacker might intentionally disable their location tracking tag to make it harder for a victim to detect and/or locate the tag. This could be done periodically or permanently and either remotely or using a [physical device](https://undetectag.com/products/undetectag). Feasibility of this attack is easy, though the likelihood is medium, as it requires some specific knowledge (i.e. victim is searching for tag) or specific hardware.  The impact is medium as the tag can still be detected and physically located, though it may be more difficult to do so. The risk level is medium. The impact of this attack can be partially mitigated by minimizing the time needed to detect unwanted location tracking and maintaining the same identifier on reset.
+
+### Disabling Victim Tag Detection
+
+An attacker might intentionally disable passive unwanted location tracking detection on a victim's device. The impact of this attack is high as it would prevent the victim from being notified about possible unwanted location tracking. The likelihood and is medium. Feasibility and likelihood are moderate as it requires the attacker physically or remotely disable settings on a victim's device. The risk level is high. This attack can be partially mitigated by notifying victims of potential location tracking using other means e.g. sounds or haptics on location tracking tags.
 
 ### Multi-Tag Correlation Attack
 
