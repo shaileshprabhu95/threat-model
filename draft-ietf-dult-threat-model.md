@@ -274,10 +274,9 @@ To systematically assess the risks associated with different threats, we introdu
 | Disabling Victim Tag | Medium | Medium | Moderate | Medium | Victims | Partial |
 | Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
 | Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
-| Impersonation Attack | High | Low | Hard | Medium | Victims | No |
+| Impersonation Attack | High | Medium | Moderate | High | Victims | Partial |
 | Replay Attack | Medium | High | Easy | Medium | Victims | No |
 | Heterogeneous Tracker Networks | High | Medium | Hard | Medium | Victims | No |
-| Unauthorized Enrollment in a Crowdsourced Tracking Network | High | Medium | Moderate | High | Victims | Partial |
 
 ### Deploying Multiple Tags
 
@@ -315,9 +314,9 @@ By distributing multiple tracking tags across locations frequently visited by a 
 
 ### Impersonation Attack
 
-Attackers can potentially impersonate legitimate tracking devices and successfully authenticate within crowd-sourced location tracking networks. By impersonating an authorized tracker, an attacker could inject false location data, misattribute tracker ownership, or evade detection by appearing as a trusted device or rotating identifiers frequently to evade detection. This tactic increases the difficulty of accurately identifying unauthorized tracking attempts and undermines the reliability of the network. Currently, no fully effective mitigation exists. However, improvements in authentication mechanisms, such as cryptographic signing of broadcasts, and anomaly detection techniques may help reduce the risk.
+Attackers might be able to impersonate legitimate tracking devices and successfully authenticate within crowd-sourced location tracking networks, enabling tracking without complying with the DULT protocol. This can be done by [deploying custom tags](https://www.hackster.io/news/fabian-braunlein-s-esp32-powered-find-you-tag-bypasses-apple-s-airtag-anti-stalking-protections-0f2c9ee7da74) or by using [devices to mimic tags](https://cec.gmu.edu/news/2025-02/find-my-hacker-how-apples-network-can-be-potential-tracking-tool). By impersonating an authorized tag, an attacker could inject false location data, misattribute tag ownership, or evade detection by appearing as a trusted device or rotating identifiers frequently to evade detection. This tactic increases the difficulty of accurately identifying unauthorized tracking attempts and undermines the reliability of the network. Currently, no fully effective mitigation exists. However, improvements in authentication mechanisms, such as cryptographic signing of broadcasts, and anomaly detection techniques may help reduce the risk.
 
-Impersonation attacks require defeating authentication mechanisms, making them less likely (low likelihood) but high impact if successful. These attacks are difficult to execute (hard feasibility) due to the need for significant technical expertise and specialized hardware/software. Given the combination of impact, likelihood, and feasibility, impersonation attacks present a medium overall risk due to their high impact but low likelihood and difficulty of execution.
+The impact of this attack is high, as it enables real-time location tracking by exploiting the behavior of crowdsourced location networks. The likelihood is medium and the feasibility is moderate; while examples have been demonstrated by researchers, attacks depend on either deploying custom hardware or exploiting platform-specific capabilities such as unrestricted Bluetooth broadcasting. As a result, the overall risk level is considered high. Protocol-level authentication is needed to validate tracker identities and prevent these attacks. Operating systems can partially mitigate software impersonation attacks by restricting low-level BLE broadcasting unless elevated privileges are granted. 
 
 ### Replay Attack
 
@@ -326,16 +325,6 @@ In addition to impersonating legitimate tracking devices (see {{impersonation-at
 ### Heterogeneous Tracker Networks
 
 Attackers may use a mix of tracking devices from different manufacturers (e.g., Apple AirTags, Tile, Samsung SmartTags) to exploit gaps in vendor-specific tracking protections. Many detection systems are brand-dependent, making them ineffective against mixed tracker deployments. The goal of the DULT protocol is to enable a cross-vendor framework; however, any slight differences in potential implementation could be exploited. The impact is high, as it circumvents traditional defenses, while the likelihood is medium, since deploying multiple brands requires effort. With feasibility at a hard level, this remains a medium-risk attack. This attack can be mitigated by manufacturers adopting the DULT protocol and ensuring that the DULT protocol is sufficiently clear to minimize gaps in vendor-specific tracking protections.
-
-### Unauthorized Enrollment in a Crowdsourced Tracking Network
-
-Recent research has demonstrated a novel attack in which adversaries can impersonate a legitimate tracking device, such as an Apple AirTag, and illegitimately enroll in a crowdsourced location tracking network without the manufacturer’s involvement or user consent. In this attack, a general-purpose device such as a smartphone, IoT gadget, or laptop is configured to emulate the behavior of a lost tracker. As a result, nearby Apple devices relay the impersonator’s location through the Find My network infrastructure. Although the impersonating device is not an official AirTag, it successfully exploits the global network of relaying Apple devices to enable continuous, remote tracking.
-
-This type of attack raises significant privacy and security concerns. By bypassing manufacturer-level access controls, the attacker is able to leverage large-scale tracking infrastructure without deploying any physical hardware. Because the device behaves like a legitimate AirTag, it avoids traditional detection mechanisms that rely on identifying specific tracker types. The ability to embed the tracking logic in general-purpose devices makes this threat especially insidious in scenarios where hardware scanning is assumed to be sufficient.
-
-The impact of this attack is high, as it enables real-time location tracking by exploiting the behavior of crowdsourced location networks without requiring physical tracker hardware. The likelihood is medium, given that the attack requires an understanding of the protocol and the ability to replicate tracker behavior in software. The feasibility is moderate; while the underlying techniques have been demonstrated by researchers, the attack depends on platform-specific capabilities such as unrestricted Bluetooth broadcasting. As a result, the overall risk level is considered high. While there is currently no mitigation at the protocol level, some operating systems restrict low-level BLE broadcasting unless elevated privileges are granted, offering partial protection. There is a need for protocol-level authentication, stronger validation of tracker identities, and potential rate-limiting of unverified broadcasts to reduce the risk of abuse.
-
-This attack was demonstrated by researchers at George Mason University and is described in their 2025 report, Find My Hacker: How Apple’s Network Can Be a Potential Tracking Tool (https://cec.gmu.edu/news/2025-02/find-my-hacker-how-apples-network-can-be-potential-tracking-tool).
 
 ## What is in scope
 
