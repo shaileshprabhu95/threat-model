@@ -270,7 +270,8 @@ To systematically assess the risks associated with different threats, we introdu
 | Physically Modifying Tags | High | Medium | Moderate | Medium | Victims | No |
 | Firmware Modifications | High | Low | Hard | Medium | Victims | Partial |
 | Attacker Accessory Disablement | Medium | Medium | Easy | Medium | Victims | Partial |
-| Disabling Victim Tag Protection | High | Medium | Moderate | Medium | Victims | Partial |
+| Disabling Victim Tag Detection | High | Medium | Moderate | Medium | Victims | Partial |
+| Disabling Victim Tag | Medium | Medium | Moderate | Medium | Victims | Partial |
 | Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
 | Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
 | Impersonation Attack | High | Low | Hard | Medium | Victims | No |
@@ -302,6 +303,10 @@ An attacker might intentionally disable their location tracking tag to make it h
 ### Disabling Victim Tag Detection
 
 An attacker might intentionally disable passive unwanted location tracking detection on a victim's device. The impact of this attack is high as it would prevent the victim from being notified about possible unwanted location tracking. The likelihood and is medium. Feasibility and likelihood are moderate as it requires the attacker physically or remotely disable settings on a victim's device. The risk level is high. This attack can be partially mitigated by notifying victims of potential location tracking using other means e.g. sounds or haptics on location tracking tags.
+
+### Disabling Victim Tag
+
+An attacker might intentionally disable a victim's tag as a form of harassment. This could be done with physical access to the tag, using a victim's own device to disable the tag, or with remote access to disable the tag via the crowdsourced network. The impact and likelihood of this attack is medium. The feasibility is moderate, as it requires some access to victim's tag, device, or account. The risk level is therefore medium. Physical disablement of a tag cannot be mitigated, but other forms of disablement may be mitigated by notifying users that a change has been made on their account, similar to suspicious login notifications.
 
 ### Multi-Tag Correlation Attack
 
