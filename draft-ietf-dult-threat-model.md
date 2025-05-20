@@ -270,6 +270,7 @@ To systematically assess the risks associated with different threats, we introdu
 | Physically Modifying Tags | High | Medium | Moderate | Medium | Victims | No |
 | Firmware Modifications | High | Low | Hard | Medium | Victims | Partial |
 | Attacker Accessory Disablement | Medium | Medium | Easy | Medium | Victims | Partial |
+| Disabling Victim Tag Protection | High | Medium | Moderate | Medium | Victims | Partial |
 | Misuse of Remote Disablement | Medium | Medium | Moderate | Medium | Victims | Partial |
 | Multi-Tag Correlation Attack | High | Medium | Moderate | Medium | Victims | No |
 | Impersonation Attack | High | Low | Hard | Medium | Victims | No |
@@ -288,11 +289,11 @@ While rotating identifiers provides partial mitigation, attackers can still use 
 
 ### Physically Modifying Tags
 
-An attacker might physically modify a tag in ways that make it non-conformant with the DULT protocol. Physical modifications may include disabling the speaker or vibration alert or shielding and altering the antenna to reduce transmission range. These modifications can make it more difficult for victims to discover hidden trackers, leading to a high impact. Hardware modifications require some expertise, resulting in a medium likelihood and medium feasibility.  Given this combination of factors, the overall risk level is medium. 
+An attacker might physically modify a tag in ways that make it non-conformant with the DULT protocol. Physical modifications may include disabling the speaker or vibration alert or shielding and altering the antenna to reduce transmission range. These modifications can make it more difficult for victims to discover hidden trackers, leading to a high impact. Hardware modifications require some expertise, resulting in a medium likelihood and medium feasibility.  Given this combination of factors, the overall risk level is medium.
 
 ### Accessory Firmware Modifications
 
-The DULT protocol (see {{!I-D.draft-ietf-dult-accessory-protocol}}) will specify that accessory firmware images MUST be authenticated, and that accessories MUST verify the integrity and origin of firmware. However, if these protections were to be bypassed, an accessory's software could be altered to deviate from standard behavior. Attackers may manipulate advertisement intervals to reduce detection opportunities, allowing the tag to evade tracking for extended periods, or rotate IDs rapidly, disrupting detection systems that rely on tracking unknown device persistence. Firmware-based changes would have high impact, but also have hard feasibility, which makes their likelihood low and the overall risk level medium. 
+The DULT protocol (see {{!I-D.draft-ietf-dult-accessory-protocol}}) will specify that accessory firmware images MUST be authenticated, and that accessories MUST verify the integrity and origin of firmware. However, if these protections were to be bypassed, an accessory's software could be altered to deviate from standard behavior. Attackers may manipulate advertisement intervals to reduce detection opportunities, allowing the tag to evade tracking for extended periods, or rotate IDs rapidly, disrupting detection systems that rely on tracking unknown device persistence. Firmware-based changes would have high impact, but also have hard feasibility, which makes their likelihood low and the overall risk level medium.
 
 ### Attacker Accessory Disablement
 
