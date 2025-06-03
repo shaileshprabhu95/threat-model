@@ -62,6 +62,9 @@ A naive implementation of this design exposes both a tag's user and anyone who m
   - If accessories simply have a fixed identifier that is reported back to the tracking network, then the central server is able to track any accessory without the user's assistance, which is clearly undesirable.
   - Any attacker who can guess a tag ID can query the central server for its location.
   - An attacker can surreptitiously plant an accessory on a target and thus track them by tracking their "own" accessory.
+  - Attackers could launch DoS attacks by flooding the tracking service with spoofed tag reports, disrupting real updates and overwhelming the central server.
+  - Frequent co-location of multiple tags enables the central server or a passive observer to infer social relationships, routines, or group behaviors, compromising user privacy without consent.
+
 
 While location tracking tags have existed for over a decade, they became especially widely-used in the Global North in the last several years as crowdsourced networks were deployed by major smart phone manufacturers. However, due to their reliance on a high density of non-owner devices for the network to be effective and the relative cost of location tracking tags, location tracker use in the Global South is typically limited to affluent communities. If the cost of non-owner devices and location tracking tags decrease, an uptick of unwanted location tracking could also occur in contexts where it is currently infeasible.
 
@@ -375,7 +378,7 @@ As discussed in {{security-considerations}}, unwanted location tracking can invo
 
 ## Design Requirements
 
-The DULT protocol should 1) allow victims to detect unwanted location tracking, 2) help victims find tags that are tracking them, and 3) provide instructions for victims to disable those trackers if they choose. These affordances should be implemented while considering the appropriate privacy and security requirements.
+The DULT protocol should 1) allow victims to detect unwanted location tracking, 2) help victims find tags that are tracking them, and 3) provide instructions for victims to disable those trackers if they choose. These affordances should be implemented while considering the appropriate privacy and security requirements, 4) Avoid falsely flagging legitimate, co-owned, or nearby tags as threats, which could create confusion or unnecessary panic.
 
 ### Detecting Unwanted Location Tracking
 
@@ -383,13 +386,57 @@ There are three main ways that the DULT protocol should assist victims in detect
 
 #### Active Scanning
 
-There may be scenarios where a victim suspects that they are being tracked without their consent. Active scanning should allow a user to use a native application on their device to search for tracking tags that are separated from their owners. Additional information about when that tag has been previously encountered within a designated time window (e.g. the last 12 hours) should also be included if available (see {{privacy-and-security-requirements-todo}}). Allowing users to "snooze" or ignore tags known to be safe (e.g. tags from a family member) could also be implemented. Tracking tags that are near their owners should not be shared to avoid abuse of the active scanning feature.
+There may be scenarios where a victim suspects that they are being tracked without their consent. Active scanning should allow a user to use a native application on their device to search for tracking tags that are separated from their owners. Additional information about when that tag has been previously encountered within a designated time window (e.g. the last 12 hours) should also be included if available (see {{privacy-and-security-requirements-todo}}). Allowing users to "snooze" or ignore tags known to be safe (e.g. tags from a family member) could also be implemented. Tracking tags that are near their owners should not be shared to avoid abuse of the active scanning feature.To further prevent misuse, the system should apply safeguards such as rate-limiting scan frequency and hiding or disguising sensitive tag information, helping to ensure that attackers cannot use the scanning feature to locate and disable legitimate tracking tags (e.g. to facilitate theft)
 
 #### Passive Scanning
 
 The platform should passively scan for devices suspected of unwanted location tracking and notify the user. This will involve implementing one or more algorithms to use to flag trackers and determine when to notify the user. (A dedicated DULT WG document will address tracking algorithms, and will be linked when it is available.) The user could be notified through a push notification or through Sounds and Haptics (see {{tracking-tag-alerts}}). When a tag has been identified as potentially being used for unwanted location tracking, the user should be able to view the serial number of the device along with obfuscated owner information (e.g. last four digits of phone number, obfuscated email address) and instructions on how to find and/or disable the device (see {{finding-tracking-tags}} and {{disabling-tracking-tags}}). There will be tradeoffs between detecting potential unwanted location tracking promptly and alerting the potential victim prematurely. One way to handle these tradeoffs is to allow users to set the sensitivity of these alerts. For example, the [AirGuard](https://github.com/seemoo-lab/AirGuard) app includes three different "Security Level" settings that users can customize.
 
 To improve the accuracy of unwanted tracking detection, a confidence scoring mechanism can be used. Instead of issuing binary alerts for all detected tracking devices, the system assigns a confidence score based on multiple factors, helping distinguish between genuine tracking threats and benign scenarios.
+
+This section outlines individual factors used in calculating a confidence score for detecting potential unwanted location tracking. Each factor is scored independently and contributes to the overall risk assessment
+
+4.1.1.2.1. Duration of Proximity
+
+Tracks how long a device remains in close proximity to the user.
+
+Rationale: Devices that persist near a user for extended periods are more likely to indicate tracking activity than transient encounters (e.g., passing someone on public transit).
+
+4.1.1.2.2. Movement Correlation
+
+Measures how closely the movement of the suspected device mirrors that of the user.
+
+Rationale: High movement correlation (e.g., appearing at home, then work, then a store with the user) increases the likelihood that the device is following the user intentionally.
+
+4.1.1.2.3. Signal Strength Trends
+
+Observes how the signal strength of the suspected device (e.g., Bluetooth RSSI) changes over time.
+
+Rationale: A sustained or increasing signal strength suggests physical proximity to the user, strengthening the case for intentional tracking.
+
+4.1.1.2.4. Absence of Known Owner
+
+Determines whether the device is associated with the user or their known contacts.
+
+Rationale: Devices linked to the user (e.g., paired devices, family members) are generally benign. Unrecognized devices are more suspicious.
+
+4.1.1.2.5. Persistence
+
+Evaluates how often and across how many different times/locations the same device is observed.
+
+Rationale: Persistent reappearance across time and space indicates deliberate placement or tracking.
+
+4.1.1.2.6. Hardware Identity
+
+Analyzes device identity details such as MAC address consistency, vendor information, or known tracker models.
+
+Rationale: Certain devices (e.g., AirTags) are known to be used for tracking. Suspicious characteristics (e.g., MAC randomization) can indicate evasion tactics.
+
+4.1.1.2.7. Environmental Context
+
+Considers the location in which the device is seen (e.g., home, office, public places).
+
+Rationale: Devices seen only in familiar, safe zones may be harmless. Appearances in unfamiliar or private locations without explanation raise concern.
 
 A confidence-based approach offers the following advantages:
 
@@ -443,7 +490,9 @@ The BLE payload in BLE 4.0 can support advertisement packets of up to 37 bytes. 
 
 BLE advertisements operate in the 2.4 GHz ISM band, making them susceptible to interference from Wi-Fi, microwave ovens, and other wireless devices. The presence of environmental noise may degrade detection accuracy and introduce variability in scan results.
 
-The BLE protocol also enforces strict power efficiency mechanisms, such as advertising intervals and connection event scheduling, which impact detection frequency. Devices operating in low-power modes may significantly reduce their advertisement frequency to conserve energy, making periodic detection less reliable. Furthermore, platform-level constraints, such as OS-imposed scanning limits and background activity restrictions, further impact the consistency and responsiveness of tracking detection mechanisms. For further discussion of power constraints, see {{power-constraints}}.
+BLE uses channel hopping for advertising (three advertising channels). Scanners need to cover all these channels to avoid missing advertisements.
+
+The BLE protocol also enforces strict power efficiency mechanisms, such as advertising intervals and connection event scheduling, which impact detection frequency. Devices operating in low-power modes or sleep modes may significantly reduce their advertisement frequency to conserve energy, making periodic detection less reliable. Furthermore, platform-level constraints, such as OS-imposed scanning limits and background activity restrictions, further impact the consistency and responsiveness of tracking detection mechanisms. For further discussion of power constraints, see {{power-constraints}}.
 
 Additionally, Bluetooth-based tracking systems typically rely on an active Bluetooth connection on the owner’s device to determine whether a tag is in the owner's possession. If the owner disables Bluetooth on their phone, the system may incorrectly infer that the tag is no longer nearby, potentially triggering a false positive alert for unwanted tracking. This limitation arises from the inability of Bluetooth-based systems to verify proximity without active signals from the owner’s device. There is currently no straightforward solution to this issue using Bluetooth alone, and it represents an inherent trade-off between privacy and detection reliability. Systems should account for this possibility and communicate it clearly to users.
 
@@ -466,6 +515,8 @@ Unwanted tracking detection is constrained by the diverse range of devices used 
 Hardware variability affects detection accuracy. While newer smartphones are equipped with advanced Bluetooth Low Energy (BLE) chipsets capable of frequent and reliable scanning, older smartphones, feature phones, and IoT devices may have reduced BLE performance. Differences in antenna sensitivity, chipset power, and OS-level access control can result in inconsistent detection, where some devices fail to detect tracking signals as reliably as others.
 
 Operating system restrictions can affect detection efforts, particularly due to background Bluetooth Low Energy (BLE) scanning policies. Both iOS and Android implement mechanisms to manage background scanning behavior, balancing energy efficiency and privacy considerations. On iOS, background BLE scanning operates with periodic constraints, which may limit the frequency of detection updates. Android applies similar policies to regulate background processes and optimize power consumption. Additionally, privacy frameworks on mobile platforms may influence how applications access and process certain device-related data. These factors, along with resource limitations in wearables and IoT devices, can impact the feasibility of continuous scanning and detection.
+
+Further, platform permission models can restrict access to BLE scan data. For example, Android requires coarse or fine location permissions to perform BLE scanning, and users may revoke these permissions. Additionally, radio coexistence (BLE and Wi-Fi sharing the 2.4 GHz band) can impact BLE performance, especially on devices with shared chipsets. User interface constraints, especially on wearables, may also limit how users receive or interact with tracking alerts.
 
 Processing and memory constraints are another limiting factor, particularly for low-end mobile devices and embedded systems. Continuous scanning and anomaly detection algorithms, especially those relying on machine learning-based threat detection, require substantial processing power and RAM. Devices with limited computational resources may struggle to maintain effective real-time detection without degrading overall performance. Ensuring that detection mechanisms remain lightweight and optimized for constrained environments is essential.
 
