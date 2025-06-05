@@ -414,23 +414,17 @@ Observes how the signal strength of the suspected device (e.g., Bluetooth RSSI) 
 
 **Rationale**: A sustained or increasing signal strength suggests physical proximity to the user, strengthening the case for intentional tracking.
 
-###### Absence of Known Owner
-
-Determines whether the device is associated with the user or their known contacts.
-
-**Rationale**: Devices linked to the user (e.g., paired devices, family members) are generally benign. Unrecognized devices are more suspicious.
-
 ###### Persistence
 
-Evaluates how often and across how many different times/locations the same device is observed.
+Evaluates how often and across how many different times/locations the same device is observed, while accounting for identifier rotation.
 
-**Rationale**: Persistent reappearance across time and space indicates deliberate placement or tracking.
+**Rationale**: Frequent reappearances over time and space can indicate deliberate placement, even if identifiers change periodically.
 
 ###### Hardware Identity
 
-Analyzes device identity details such as MAC address consistency, vendor information, or known tracker models.
+Analyzes available Bluetooth advertisement metadata, such as vendor-specific fields or tracker model indicators, while respecting identifier randomization.
 
-**Rationale**: Certain devices (e.g., AirTags) are known to be used for tracking. Suspicious characteristics (e.g., MAC randomization) can indicate evasion tactics.
+**Rationale**: Certain devices (e.g., known commercial trackers) are more likely to be associated with tracking. Even with rotating identifiers, consistent vendor metadata or other characteristics may provide useful signals. 
 
 ###### Environmental Context
 
