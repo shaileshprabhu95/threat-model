@@ -424,7 +424,7 @@ Evaluates how often and across how many different times/locations the same devic
 
 Analyzes available Bluetooth advertisement metadata, such as vendor-specific fields or tracker model indicators, while respecting identifier randomization.
 
-**Rationale**: Certain devices (e.g., known commercial trackers) are more likely to be associated with tracking. Even with rotating identifiers, consistent vendor metadata or other characteristics may provide useful signals. 
+**Rationale**: Certain devices (e.g., known commercial trackers) are more likely to be associated with tracking. Even with rotating identifiers, consistent vendor metadata or other characteristics may provide useful signals.
 
 ###### Environmental Context
 
