@@ -278,6 +278,7 @@ To systematically assess the risks associated with different threats, we introdu
 | Impersonation Attack | High | Medium | High | Victims | Partial |
 | Replay Attack | Medium | High | Medium | Victims | No |
 | Heterogeneous Tracker Networks | High | Medium | Medium | Victims | No |
+| Abuse via Victim's Own Tag | High | Medium | High | Victims | Partial |
 
 ### Deploying Multiple Tags
 
@@ -328,6 +329,14 @@ In addition to impersonating legitimate tracking devices (see {{impersonation-at
 ### Heterogeneous Tracker Networks
 
 Attackers may use a mix of tracking devices from different manufacturers (e.g., Apple AirTags, Tile, Samsung SmartTags) to exploit gaps in vendor-specific tracking protections. Many detection systems are brand-dependent, making them ineffective against mixed tracker deployments. The goal of the DULT protocol is to enable a cross-vendor framework; however, any slight differences in potential implementation could be exploited. The impact is high, as it circumvents traditional defenses. The likelihood is medium, as deploying multiple brands requires effort and coordination, and may demand deeper knowledge of platform-specific behaviors and limitations. This remains a medium-risk attack. This attack can be mitigated by manufacturers adopting the DULT protocol and ensuring that the DULT protocol is sufficiently clear to minimize gaps in vendor-specific tracking protections.
+
+### Abuse via Victim's Own Tag
+
+Attackers with access to a victim’s account, either through password reuse, phishing, social engineering, or credential theft, can exploit DULT’s ownership model by using the victim’s own tracker to monitor their location. Since the tracker is registered to the victim, the system assumes the user is the legitimate owner and suppresses any unwanted tracking alerts. This creates a significant blind spot, as the victim is effectively tracked by their own device without any warning.
+
+This threat differs from impersonation or spoofing attacks because it does not rely on breaking cryptographic protections or evading detection algorithms. Instead, it leverages the legitimate trust relationship encoded in the protocol. The impact of this attack is high, as it results in silent tracking with no alert mechanism. The likelihood is medium, as account compromise is a relatively common occurrence in real-world settings, though it still requires some attacker effort or opportunity. Overall, the risk level is high due to the complete circumvention of core notification systems.
+
+Partial mitigation may be possible through account activity monitoring, anomaly detection (e.g., login from unfamiliar location or device), and notifications of significant account events (such as tag access or tag movement linked to a different device). However, these features depend on platform implementation and may not be uniformly enforced.
 
 ## What is in scope
 
