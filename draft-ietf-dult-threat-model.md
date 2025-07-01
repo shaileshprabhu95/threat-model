@@ -269,12 +269,11 @@ To systematically assess the risks associated with different threats, we introdu
 | Deploying Multiple Tags | High | High	| High | Victims | Partial |
 | Remote Advertisement Monitoring | High | High | High | All users | No |
 | Physically Modifying Tags | High | Medium | Medium | Victims | No |
-| Firmware Modifications | High | Low | Medium | Victims | Partial |
+| Accessory Firmware Modifications | High | Low | Medium | Victims | Partial |
 | Attacker Accessory Disablement | Medium | Medium | Medium | Victims | Partial |
 | Tracking Using Victim's Own Tag | High | Medium | High | Victims | Partial |
 | Disabling Victim Tag Detection | High | Medium | Medium | Victims | Partial |
 | Disabling Victim Tag | Medium | Medium | Medium | Victims | Partial |
-| Misuse of Remote Disablement | Medium | Medium | Medium | Victims | Partial |
 | Multi-Tag Correlation Attack | High | Medium | Medium | Victims | No |
 | Impersonation Attack | High | Medium | High | Victims | Partial |
 | Replay Attack | Medium | High | Medium | Victims | No |
